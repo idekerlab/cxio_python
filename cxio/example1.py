@@ -27,5 +27,12 @@ for e in cx_reader.get_post_meta_data():
 
 print()
 print()
+
+# Getting element counts
+for name, count in cx_reader.get_aspect_element_counts().items():
+    print(name + ': ' + str(count))
+
+print()
+print()
 print('OK')
 
