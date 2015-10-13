@@ -13,10 +13,14 @@ class CxReader(object):
         self.__pre_meta_data = []
         self.__post_meta_data = []
         self.__first_element = None
+        self.__aspect_element_counts = {}
         for e in self.aspect_elements():
             if e is not None:
                 self.__first_element = e
                 break
+
+    def get_aspect_element_counts(self):
+        return self.__aspect_element_counts
 
     def aspect_elements(self):
         if self.__first_element is not None:
@@ -65,5 +69,9 @@ class CxReader(object):
                                 yield None
                         else:
                             saw_aspect_element = True
+                            if current_name not in self.__aspect_element_counts:
+                                self.__aspect_element_counts[current_name] = 1
+                            else:
+                                self.__aspect_element_counts[current_name] += 1
                             yield AspectElement(current_name, val)
         raise StopIteration()
