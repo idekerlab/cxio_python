@@ -1,0 +1,125 @@
+[ {
+"metaData" : [ {
+    "consistencyGroup" : "1",
+    "elementCount" : "32",
+    "idCounter" : "200",
+    "lastUpdate" : "1034334343",
+    "name" : "nodes",
+    "version" : "1.0"
+  }, {
+    "consistencyGroup" : "1",
+    "lastUpdate" : "1034334343",
+    "name" : "Citation",
+    "properties" : [ {
+      "name" : "curator",
+      "value" : "Ideker Lab"
+    } ],
+    "version" : "1.0"
+  } ]
+}, {
+  "edges" : [ {
+    "@id" : "edge0",
+    "s" : "node0",
+    "t" : "node1"
+  }, {
+    "@id" : "edge1",
+    "s" : "node0",
+    "t" : "node2"
+  } ]
+}, {
+  "nodes" : [ {
+    "@id" : "node0"
+  }, {
+    "@id" : "node1"
+  }, {
+    "@id" : "node2"
+  } ]
+}, {
+  "cartesianLayout" : [ {
+    "node" : "node0",
+    "x" : 12.0,
+    "y" : 21.0,
+    "z" : 1.0
+  }, {
+    "node" : "node1",
+    "x" : 42.0,
+    "y" : 23.0,
+    "z" : 2.0
+  }, {
+    "node" : "node2",
+    "x" : 34.0,
+    "y" : 23.0,
+    "z" : 3.0
+  } ]
+}, {
+  "edgeAttributes" : [ {
+    "po" : "edge0",
+    "n" : "name",
+    "v" : "A"
+  }, {
+    "po" : "edge0",
+    "n" : "weight",
+    "v" : "2",
+    "d" : "integer"
+  }, {
+    "po" : "edge1",
+    "n" : "name",
+    "v" : "B"
+  }, {
+    "po" : "edge1",
+    "n" : "weight",
+    "v" : "3",
+    "d" : "integer"
+  } ]
+}, {
+  "nodeAttributes" : [ {
+    "po" : "node0",
+    "n" : "expression",
+    "v" : [ "0.0", "0.1" ],
+    "d" : "list_of_double"
+  }, {
+    "po" : "node1",
+    "n" : "expression",
+    "v" : [ "1.0", "1.1" ],
+    "d" : "list_of_double"
+  }, {
+    "po" : "node2",
+    "n" : "expression",
+    "v" : [ "2.0", "2.1" ],
+    "d" : "list_of_double"
+  }, {
+    "s" : "subnet 1",
+    "po" : [ "node0", "node1", "node2" ],
+    "n" : "species",
+    "v" : "Mus musculus"
+  } ]
+}, {
+  "unknown_element" : [ {
+    "A" : "a",
+    "B" : "b",
+    "C" : "c",
+    "D" : {
+      "AA" : "aa"
+    },
+    "E" : [ "1", "2", "3" ],
+    "F" : [ {
+      "_a1" : "aa1",
+      "_a2" : "aa2",
+      "_a3" : "aa3"
+    }, {
+      "_b1" : "bb1",
+      "_b2" : "bb2",
+      "_b3" : "bb3"
+    }, {
+      "_c1" : "cc1",
+      "_c2" : "cc2",
+      "_c3" : "cc3"
+    } ]
+  } ]
+}, {
+  "metaData" : [ {
+    "name" : "post meta data",
+    "success" : true,
+    "write time" : 0.34
+  } ]
+} ]
