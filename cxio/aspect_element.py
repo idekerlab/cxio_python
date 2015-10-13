@@ -1,7 +1,6 @@
 __author__ = 'cmzmasek'
 
 import json
-import ijson
 
 
 class AspectElement(object):
