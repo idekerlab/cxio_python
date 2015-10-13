@@ -2,6 +2,7 @@ from cxio.cx_reader import CxReader
 from cxio.cx_writer import CxWriter
 import io
 from cxio.cx_constants import CxConstants
+from cxio.cx_util import CxUtil
 
 fi = open('/Users/cmzmasek/WORK/PROG/PYTHON/CXIO/cxio/example_data/example0.cx', 'r')
 
@@ -51,25 +52,14 @@ w.add_pre_meta_data(cx_reader.get_pre_meta_data())
 w.start()
 
 # Writing various aspects
-w.start_aspect_fragment(CxConstants.NODES)
-for e in cx[CxConstants.NODES]:
-    w.write_aspect_element(e)
-w.end_aspect_fragment()
 
-w.start_aspect_fragment(CxConstants.EDGES)
-for e in cx[CxConstants.EDGES]:
-    w.write_aspect_element(e)
-w.end_aspect_fragment()
+CxUtil.write_aspect_fragment(w, cx[CxConstants.NODES])
 
-w.start_aspect_fragment(CxConstants.CARTESIAN_LAYOUT)
-for e in cx[CxConstants.CARTESIAN_LAYOUT]:
-    w.write_aspect_element(e)
-w.end_aspect_fragment()
+CxUtil.write_aspect_fragment(w, cx[CxConstants.EDGES])
 
-w.start_aspect_fragment(CxConstants.EDGE_ATTRIBUTES)
-for e in cx[CxConstants.EDGE_ATTRIBUTES]:
-    w.write_aspect_element(e)
-w.end_aspect_fragment()
+CxUtil.write_aspect_fragment(w, cx[CxConstants.CARTESIAN_LAYOUT])
+
+CxUtil.write_aspect_fragment(w, cx[CxConstants.EDGE_ATTRIBUTES])
 
 # Ending the json list
 w.end()
