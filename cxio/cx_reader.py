@@ -12,8 +12,9 @@ class CxReader(object):
         self.__parser = ijson.parse(f)
         self.__pre_meta_data = []
         self.__post_meta_data = []
-        self.__first_element = None
         self.__aspect_element_counts = {}
+        self.__aspect_names = set()
+        self.__first_element = None
         for e in self.aspect_elements():
             if e is not None:
                 self.__first_element = e

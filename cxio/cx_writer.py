@@ -12,6 +12,7 @@ class CxWriter(object):
         self.__fragment_started = False
         self.__pre_meta_data = []
         self.__post_meta_data = []
+        self.__aspect_element_counts = {}
 
     def add_pre_meta_data(self, pre_meta_data):
         if self.__started:
@@ -20,6 +21,9 @@ class CxWriter(object):
 
     def add_post_meta_data(self, post_meta_data):
         self.__post_meta_data.extend(post_meta_data)
+
+    def get_aspect_element_counts(self):
+        return self.__aspect_element_counts
 
     def start(self):
         if self.__started:
