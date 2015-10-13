@@ -5,7 +5,7 @@ fi = open('/Users/cmzmasek/WORK/PROG/PYTHON/CXIO/cxio/example_data/example0.cx',
 # Creating a new CX reader
 cx_reader = CxReader(fi)
 
-# Getting pre meta data
+# Getting and printing pre meta data
 print('pre meta data: ')
 for e in cx_reader.get_pre_meta_data():
     print(e)
@@ -20,6 +20,7 @@ for e in cx_reader.aspect_elements():
 print()
 print()
 
+# Getting and printing post meta data
 print('post meta data:')
 for e in cx_reader.get_post_meta_data():
     print(e)
