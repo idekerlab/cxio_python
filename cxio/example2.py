@@ -36,6 +36,8 @@ for e in cx[CxConstants.EDGE_ATTRIBUTES]:
 for e in cx_reader.get_post_meta_data():
     print(e)
 
+print()
+print()
 
 # WRITING
 # -------
@@ -69,6 +71,9 @@ w.add_post_meta_data(cx_reader.get_post_meta_data())
 for name, count in w.get_aspect_element_counts().items():
     print(name + ': ' + str(count))
 
+print()
+print()
+
 # Adding element counts as post meta data
 post = AspectElement(CxConstants.META_DATA, w.get_aspect_element_counts())
 w.add_post_meta_data(post)
@@ -83,19 +88,21 @@ print(json_str)
 print()
 print()
 
-# READING
-# -------
+# READING (again)
+# --------------
 fi2 = io.StringIO(json_str)
+
 cx_reader2 = CxReader(fi2)
-cx2 = cx_reader2.parse_as_dictionary()
 
 # Getting and printing pre meta data
 print('pre meta data: ')
-for e in cx_reader.get_pre_meta_data():
+for e in cx_reader2.get_pre_meta_data():
     print(e)
 
 print()
 print()
+
+cx2 = cx_reader2.parse_as_dictionary()
 
 for e in cx2[CxConstants.NODES]:
     print(e)
