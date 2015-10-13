@@ -1,6 +1,7 @@
+import io
+from cxio.aspect_element import AspectElement
 from cxio.cx_reader import CxReader
 from cxio.cx_writer import CxWriter
-import io
 from cxio.cx_constants import CxConstants
 from cxio.cx_util import CxUtil
 
@@ -61,6 +62,17 @@ CxUtil.write_aspect_fragment(w, cx[CxConstants.CARTESIAN_LAYOUT])
 
 CxUtil.write_aspect_fragment(w, cx[CxConstants.EDGE_ATTRIBUTES])
 
+# Adding post meta data
+w.add_post_meta_data(cx_reader.get_post_meta_data())
+
+# Printing out element counts written so far
+for name, count in w.get_aspect_element_counts().items():
+    print(name + ': ' + str(count))
+
+# Adding element counts as post meta data
+post = AspectElement(CxConstants.META_DATA, w.get_aspect_element_counts())
+w.add_post_meta_data(post)
+
 # Ending the json list
 w.end()
 
@@ -68,12 +80,22 @@ w.end()
 json_str = fo.getvalue()
 print(json_str)
 
+print()
+print()
 
 # READING
 # -------
 fi2 = io.StringIO(json_str)
 cx_reader2 = CxReader(fi2)
 cx2 = cx_reader2.parse_as_dictionary()
+
+# Getting and printing pre meta data
+print('pre meta data: ')
+for e in cx_reader.get_pre_meta_data():
+    print(e)
+
+print()
+print()
 
 for e in cx2[CxConstants.NODES]:
     print(e)
@@ -86,4 +108,13 @@ for e in cx2[CxConstants.CARTESIAN_LAYOUT]:
 
 for e in cx2[CxConstants.EDGE_ATTRIBUTES]:
     print(e)
+
+print()
+print()
+
+# Getting and printing post meta data
+print('post meta data:')
+for e in cx_reader2.get_post_meta_data():
+    print(e)
+
 

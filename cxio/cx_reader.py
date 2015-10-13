@@ -8,8 +8,10 @@ from cxio.cx_constants import CxConstants
 class CxReader(object):
     __ITEM_NAME_ITEM_RE = re.compile('item\.(\w+)\.item')
 
-    def __init__(self, f):
-        self.__parser = ijson.parse(f)
+    def __init__(self, in_stream):
+        if in_stream is None:
+            raise AssertionError('input stream must not be none')
+        self.__parser = ijson.parse(in_stream)
         self.__pre_meta_data = []
         self.__post_meta_data = []
         self.__aspect_element_counts = {}
