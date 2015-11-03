@@ -5,7 +5,7 @@ from cxio.cx_writer import CxWriter
 from cxio.cx_constants import CxConstants
 from cxio.cx_util import CxUtil
 
-fi = open('/Users/cmzmasek/WORK/PROG/PYTHON/CXIO/cxio/example_data/example0.cx', 'r')
+fi = open('example_data/example0.cx', 'r')
 
 # READING
 # -------

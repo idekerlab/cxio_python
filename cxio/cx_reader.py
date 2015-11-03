@@ -1,4 +1,5 @@
 import re
+import ijson
 from ijson import ObjectBuilder
 from cxio.aspect_element import AspectElement
 from cxio.cx_constants import CxConstants
