@@ -1,4 +1,3 @@
-import ijson
 import re
 from ijson import ObjectBuilder
 from cxio.aspect_element import AspectElement

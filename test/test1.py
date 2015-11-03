@@ -10,9 +10,6 @@ import unittest
 
 class MyTestCase(unittest.TestCase):
 
-
-
-
     def test_1(self):
         node_0 = AspectElement(CxConstants.NODES, {"id": "_:0"})
         node_1 = AspectElement(CxConstants.NODES, {"id": "_:1"})
