@@ -10,10 +10,9 @@ import unittest
 
 class MyTestCase(unittest.TestCase):
 
-
-
-
     def test_1(self):
+        print('\n---------- cxio tests start -----------\n')
+
         node_0 = AspectElement(CxConstants.NODES, {"id": "_:0"})
         node_1 = AspectElement(CxConstants.NODES, {"id": "_:1"})
 
@@ -21,7 +20,7 @@ class MyTestCase(unittest.TestCase):
         nodes.append(node_0)
         nodes.append(node_1)
 
-        fo = io.StringIO("")
+        fo = io.StringIO()
 
         # Creating a CX writer
         w = CxWriter(fo)

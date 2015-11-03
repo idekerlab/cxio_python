@@ -1,6 +1,6 @@
 from cxio.cx_reader import CxReader
 
-fi = open('/Users/cmzmasek/WORK/PROG/PYTHON/CXIO/cxio/example_data/example0.cx', 'r')
+fi = open('example_data/example0.cx', 'r')
 
 # Creating a new CX reader
 cx_reader = CxReader(fi)
