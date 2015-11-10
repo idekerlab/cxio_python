@@ -4,8 +4,12 @@ from cxio.cx_reader import CxReader
 from cxio.cx_writer import CxWriter
 from cxio.cx_constants import CxConstants
 from cxio.cx_util import CxUtil
+from os.path import join, abspath, dirname
 
-fi = open('/Users/cmzmasek/WORK/PROG/PYTHON/CXIO/cxio/example_data/example0.cx', 'r')
+current_directory = dirname(abspath(__file__))
+example_data_path = join(current_directory, "example_data/example0.cx")
+# print "example_data_path = " + example_data_path
+fi = open(example_data_path, 'r')
 
 # READING
 # -------
