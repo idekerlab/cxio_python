@@ -17,7 +17,7 @@ setup(
     name='cxio',
     version='0.1.0',
     description='Utility to parse CX JSON streams',
-    long_description='Utility cllection to use CX JSON in Python.',
+    long_description='Utility collection to use CX JSON in Python.',
     author='Christian Zmasek',
     author_email='@ucsd.edu',
     url='https://github.com/idekerlab/cxio-python',
