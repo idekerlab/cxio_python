@@ -20,7 +20,7 @@ setup(
     long_description='Utility collection to use CX JSON in Python.',
     author='Christian Zmasek',
     author_email='cmzmasek@ucsd.edu',
-    url='https://github.com/idekerlab/cxio-python',
+    url='https://github.com/idekerlab/cxio_python',
     license='MIT License',
     install_requires=[
         'ijson'
