@@ -1,4 +1,5 @@
-__author__ = 'cmzmasek'
+from cxio.element import Element
+from cxio.cx_constants import CxConstants
 
 
 class CxUtil(object):
@@ -13,3 +14,12 @@ class CxUtil(object):
                     raise ValueError('"' + str(name) + '" different from "' + str(aspect_element.get_name() + '"'))
                 cx_writer.write_aspect_element(aspect_element)
             cx_writer.end_aspect_fragment()
+
+    @staticmethod
+    def create_number_verification_element():
+        """
+
+        :rtype : element
+        """
+        e = [dict(longNumber=CxConstants.NUMBER_VERIFICATION_VALUE)]
+        return Element(CxConstants.NUMBER_VERIFICATION, e)

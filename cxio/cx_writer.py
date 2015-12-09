@@ -2,7 +2,7 @@ import json
 import decimal
 import collections
 from cxio.cx_constants import CxConstants
-
+from cxio.cx_util import CxUtil
 
 class CxWriter(object):
 
@@ -42,6 +42,7 @@ class CxWriter(object):
             raise IOError('already started')
         self.__started = True
         self.__out.write('[')
+        self.__write_number_verification_element()
         if len(self.__pre_meta_data) > 0:
             self.__write_meta_data(self.__pre_meta_data)
 
@@ -112,6 +113,18 @@ class CxWriter(object):
             self.__aspect_element_counts[my_name] = 1
         else:
             self.__aspect_element_counts[my_name] += 1
+
+    def __write_number_verification_element(self):
+        e = CxUtil.create_number_verification_element()
+        self.__out.write('\n')
+        self.__out.write(' { ')
+        self.__out.write('"')
+        self.__out.write(e.get_name())
+        self.__out.write('"')
+        self.__out.write(':')
+        self.__out.write(' ')
+        self.__out.write(self.__aspect_element_to_json(e))
+        self.__out.write(' },')
 
     def __write_meta_data(self, meta_data):
         self.start_aspect_fragment(CxConstants.META_DATA)

@@ -14,7 +14,7 @@ fi = open('example_data/example0.cx', 'r')
 # Creating a CX reader
 cx_reader = CxReader(fi)
 
-# Getting and printin pre meta data
+# Getting and printing pre meta data
 for e in cx_reader.get_pre_meta_data():
     print(e)
 
@@ -26,6 +26,9 @@ for e in cx[CxConstants.NODES]:
     print(e)
 
 for e in cx[CxConstants.EDGES]:
+    print(e)
+
+for e in cx[CxConstants.VISUAL_PROPERTIES]:
     print(e)
 
 for e in cx[CxConstants.CARTESIAN_LAYOUT]:
@@ -57,6 +60,8 @@ w.start()
 CxUtil.write_aspect_fragment(w, cx[CxConstants.NODES])
 
 CxUtil.write_aspect_fragment(w, cx[CxConstants.EDGES])
+
+CxUtil.write_aspect_fragment(w, cx[CxConstants.VISUAL_PROPERTIES])
 
 CxUtil.write_aspect_fragment(w, cx[CxConstants.CARTESIAN_LAYOUT])
 
@@ -104,6 +109,9 @@ for e in cx2[CxConstants.NODES]:
     print(e)
 
 for e in cx2[CxConstants.EDGES]:
+    print(e)
+
+for e in cx2[CxConstants.VISUAL_PROPERTIES]:
     print(e)
 
 for e in cx2[CxConstants.CARTESIAN_LAYOUT]:

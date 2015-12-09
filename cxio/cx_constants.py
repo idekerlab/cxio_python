@@ -5,6 +5,7 @@ class CxConstants(object):
 
     META_DATA = 'metaData'
     NUMBER_VERIFICATION = 'numberVerification'
+    NUMBER_VERIFICATION_VALUE = 281474976710655
     STATUS = 'status'
     NODES = 'nodes'
     EDGES = 'edges'
