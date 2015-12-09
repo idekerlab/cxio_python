@@ -2,6 +2,7 @@ import re
 import ijson
 from ijson import ObjectBuilder
 from cxio.aspect_element import AspectElement
+from cxio.element import Element
 from cxio.cx_constants import CxConstants
 
 
@@ -17,6 +18,8 @@ class CxReader(object):
         self.__aspect_element_counts = {}
         self.__aspect_names = set()
         self.__first_element = None
+        self.__number_verification = None
+        self.__status = None
         for e in self.aspect_elements():
             if e is not None:
                 self.__first_element = e
@@ -48,6 +51,12 @@ class CxReader(object):
     def get_post_meta_data(self):
         return self.__post_meta_data
 
+    def get_number_verification(self):
+        return self.__number_verification
+
+    def get_status(self):
+        return self.__status
+
     def __aspect_elements(self):
         current_name = None
         builder = None
@@ -64,12 +73,16 @@ class CxReader(object):
                     if prefix == 'item.%s.item' % current_name:
                         val = builder.value
                         builder = None
-                        if current_name == CxConstants.META_DATA:
+                        if current_name == CxConstants.NUMBER_VERIFICATION:
+                            self.__number_verification = Element(current_name, val)
+                        elif current_name == CxConstants.STATUS:
+                            self.__status = Element(current_name, val)
+                        elif current_name == CxConstants.META_DATA:
                             if saw_aspect_element:
-                                self.__post_meta_data.append(AspectElement(current_name, val))
+                                self.__post_meta_data.append(Element(current_name, val))
                             else:
-                                self.__pre_meta_data.append(AspectElement(current_name, val))
-                                yield None
+                                self.__pre_meta_data.append(Element(current_name, val))
+                                #yield None
                         else:
                             saw_aspect_element = True
                             if current_name not in self.__aspect_element_counts:
