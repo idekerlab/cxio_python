@@ -21,7 +21,7 @@ for e in cx_reader.get_pre_meta_data():
 # Read everything into one (huge) dictionary
 cx = cx_reader.parse_as_dictionary()
 
-# Getting various aspects from the dictionary
+# Getting and printing select aspects from the dictionary
 for e in cx[CxConstants.NODES]:
     print(e)
 
@@ -29,9 +29,6 @@ for e in cx[CxConstants.EDGES]:
     print(e)
 
 for e in cx[CxConstants.CARTESIAN_LAYOUT]:
-    print(e)
-
-for e in cx[CxConstants.EDGE_ATTRIBUTES]:
     print(e)
 
 for e in cx_reader.get_post_meta_data():
@@ -55,15 +52,13 @@ w.add_pre_meta_data(cx_reader.get_pre_meta_data())
 # Starting the json list
 w.start()
 
-# Writing various aspects
+# Writing select aspects
 
 CxUtil.write_aspect_fragment(w, cx[CxConstants.NODES])
 
 CxUtil.write_aspect_fragment(w, cx[CxConstants.EDGES])
 
 CxUtil.write_aspect_fragment(w, cx[CxConstants.CARTESIAN_LAYOUT])
-
-CxUtil.write_aspect_fragment(w, cx[CxConstants.EDGE_ATTRIBUTES])
 
 # Adding post meta data
 w.add_post_meta_data(cx_reader.get_post_meta_data())
@@ -112,9 +107,6 @@ for e in cx2[CxConstants.EDGES]:
     print(e)
 
 for e in cx2[CxConstants.CARTESIAN_LAYOUT]:
-    print(e)
-
-for e in cx2[CxConstants.EDGE_ATTRIBUTES]:
     print(e)
 
 print()
