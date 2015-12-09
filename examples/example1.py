@@ -41,7 +41,6 @@ print()
 print('the status element: ')
 print(cx_reader.get_status())
 
-
 print()
 print()
 

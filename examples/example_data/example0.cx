@@ -4,127 +4,232 @@
   } ]
 }, {
   "metaData" : [ {
-    "consistencyGroup" : "1",
-    "elementCount" : "32",
-    "idCounter" : "200",
-    "lastUpdate" : "1034334343",
+    "consistencyGroup" : 1,
+    "elementCount" : 6,
+    "idCounter" : 90,
     "name" : "nodes",
     "version" : "1.0"
   }, {
-    "consistencyGroup" : "1",
-    "lastUpdate" : "1034334343",
-    "name" : "Citation",
-    "properties" : [ {
-      "name" : "curator",
-      "value" : "Ideker Lab"
-    } ],
+    "consistencyGroup" : 1,
+    "elementCount" : 7,
+    "idCounter" : 90,
+    "name" : "edges",
     "version" : "1.0"
   } ]
 }, {
-  "edges" : [ {
-    "@id" : "edge0",
-    "s" : "node0",
-    "t" : "node1"
-  }, {
-    "@id" : "edge1",
-    "s" : "node0",
-    "t" : "node2"
-  } ]
-}, {
   "nodes" : [ {
-    "@id" : "node0"
+    "@id" : 74,
+    "n" : "Node 6"
   }, {
-    "@id" : "node1"
+    "@id" : 72,
+    "n" : "Node 5"
   }, {
-    "@id" : "node2"
+    "@id" : 70,
+    "n" : "Node 4"
+  }, {
+    "@id" : 68,
+    "n" : "Node 3"
+  }, {
+    "@id" : 66,
+    "n" : "Node 2"
+  }, {
+    "@id" : 64,
+    "n" : "Node 1"
   } ]
 }, {
-  "cartesianLayout" : [ {
-    "node" : "node0",
-    "x" : 12.0,
-    "y" : 21.0,
-    "z" : 1.0
+  "edges" : [ {
+    "@id" : 78,
+    "s" : 72,
+    "t" : 74,
+    "i" : "interacts with"
   }, {
-    "node" : "node1",
-    "x" : 42.0,
-    "y" : 23.0,
-    "z" : 2.0
+    "@id" : 77,
+    "s" : 70,
+    "t" : 74,
+    "i" : "interacts with"
   }, {
-    "node" : "node2",
-    "x" : 34.0,
-    "y" : 23.0,
-    "z" : 3.0
-  } ]
-}, {
-  "edgeAttributes" : [ {
-    "po" : "edge0",
-    "n" : "name",
-    "v" : "A"
+    "@id" : 76,
+    "s" : 70,
+    "t" : 72,
+    "i" : "interacts with"
   }, {
-    "po" : "edge0",
-    "n" : "weight",
-    "v" : "2",
-    "d" : "integer"
+    "@id" : 88,
+    "s" : 68,
+    "t" : 74,
+    "i" : "interacts with"
   }, {
-    "po" : "edge1",
-    "n" : "name",
-    "v" : "B"
+    "@id" : 84,
+    "s" : 66,
+    "t" : 68,
+    "i" : "interacts with"
   }, {
-    "po" : "edge1",
-    "n" : "weight",
-    "v" : "3",
-    "d" : "integer"
+    "@id" : 83,
+    "s" : 64,
+    "t" : 68,
+    "i" : "interacts with"
+  }, {
+    "@id" : 82,
+    "s" : 64,
+    "t" : 66,
+    "i" : "interacts with"
   } ]
 }, {
   "nodeAttributes" : [ {
-    "po" : "node0",
-    "n" : "expression",
-    "v" : [ "0.0", "0.1" ],
-    "d" : "list_of_double"
+    "s" : 52,
+    "po" : 74,
+    "n" : "name",
+    "v" : "Node 6"
   }, {
-    "po" : "node1",
-    "n" : "expression",
-    "v" : [ "1.0", "1.1" ],
-    "d" : "list_of_double"
+    "s" : 52,
+    "po" : 72,
+    "n" : "name",
+    "v" : "Node 5"
   }, {
-    "po" : "node2",
-    "n" : "expression",
-    "v" : [ "2.0", "2.1" ],
-    "d" : "list_of_double"
+    "s" : 52,
+    "po" : 70,
+    "n" : "name",
+    "v" : "Node 4"
   }, {
-    "s" : "subnet 1",
-    "po" : [ "node0", "node1", "node2" ],
-    "n" : "species",
-    "v" : "Mus musculus"
+    "s" : 52,
+    "po" : 68,
+    "n" : "name",
+    "v" : "Node 3"
+  }, {
+    "s" : 52,
+    "po" : 66,
+    "n" : "name",
+    "v" : "Node 2"
+  }, {
+    "s" : 52,
+    "po" : 64,
+    "n" : "name",
+    "v" : "Node 1"
   } ]
 }, {
-  "unknown_element" : [ {
-    "A" : "a",
-    "B" : "b",
-    "C" : "c",
-    "D" : {
-      "AA" : "aa"
-    },
-    "E" : [ "1", "2", "3" ],
-    "F" : [ {
-      "_a1" : "aa1",
-      "_a2" : "aa2",
-      "_a3" : "aa3"
-    }, {
-      "_b1" : "bb1",
-      "_b2" : "bb2",
-      "_b3" : "bb3"
-    }, {
-      "_c1" : "cc1",
-      "_c2" : "cc2",
-      "_c3" : "cc3"
-    } ]
+  "cartesianLayout" : [ {
+    "node" : 74,
+    "view" : 62,
+    "x" : 64.0,
+    "y" : 29.0
+  }, {
+    "node" : 72,
+    "view" : 62,
+    "x" : 162.0,
+    "y" : 69.0
+  }, {
+    "node" : 70,
+    "view" : 62,
+    "x" : 169.0,
+    "y" : 0.0
+  }, {
+    "node" : 68,
+    "view" : 62,
+    "x" : -15.0,
+    "y" : -56.0
+  }, {
+    "node" : 66,
+    "view" : 62,
+    "x" : -124.0,
+    "y" : -13.0
+  }, {
+    "node" : 64,
+    "view" : 62,
+    "x" : -122.0,
+    "y" : -99.0
+  } ]
+}, {
+  "visualProperties" : [ {
+    "properties_of" : "network",
+    "applies_to" : 62,
+    "view" : 62,
+    "properties" : {
+      "NETWORK_BACKGROUND_PAINT" : "#FFFFFF",
+      "NETWORK_CENTER_X_LOCATION" : "0.0",
+      "NETWORK_CENTER_Y_LOCATION" : "0.0",
+      "NETWORK_CENTER_Z_LOCATION" : "0.0",
+      "NETWORK_DEPTH" : "0.0",
+      "NETWORK_EDGE_SELECTION" : "true",
+      "NETWORK_HEIGHT" : "400.0",
+      "NETWORK_NODE_SELECTION" : "true",
+      "NETWORK_SCALE_FACTOR" : "1.0",
+      "NETWORK_SIZE" : "550.0",
+      "NETWORK_WIDTH" : "550.0"
+    }
+  } ]
+}, {
+  "subNetworks" : [ {
+    "@id" : 52,
+    "nodes" : [ 74, 72, 70, 68, 66, 64 ],
+    "edges" : [ 78, 77, 76, 88, 84, 83, 82 ]
+  } ]
+}, {
+  "cyViews" : [ {
+    "@id" : 62,
+    "s" : 52
+  } ]
+}, {
+  "networkRelations" : [ {
+    "p" : 52,
+    "c" : 62,
+    "r" : "view",
+    "name" : "NetworkALPHA view"
+  }, {
+    "p" : 36,
+    "c" : 52,
+    "r" : "subnetwork",
+    "name" : "NetworkALPHA"
   } ]
 }, {
   "metaData" : [ {
-    "name" : "post meta data",
-    "success" : true,
-    "write time" : 0.34
+    "consistencyGroup" : 1,
+    "elementCount" : 0,
+    "name" : "networkAttributes",
+    "version" : "1.0"
+  }, {
+    "consistencyGroup" : 1,
+    "elementCount" : 0,
+    "name" : "hiddenAttributes",
+    "version" : "1.0"
+  }, {
+    "consistencyGroup" : 1,
+    "elementCount" : 6,
+    "name" : "nodeAttributes",
+    "version" : "1.0"
+  }, {
+    "consistencyGroup" : 1,
+    "elementCount" : 21,
+    "name" : "edgeAttributes",
+    "version" : "1.0"
+  }, {
+    "consistencyGroup" : 1,
+    "elementCount" : 6,
+    "name" : "cartesianLayout",
+    "version" : "1.0"
+  }, {
+    "consistencyGroup" : 1,
+    "elementCount" : 3,
+    "name" : "visualProperties",
+    "version" : "1.0"
+  }, {
+    "consistencyGroup" : 1,
+    "elementCount" : 1,
+    "name" : "subNetworks",
+    "version" : "1.0"
+  }, {
+    "consistencyGroup" : 1,
+    "elementCount" : 1,
+    "name" : "cyViews",
+    "version" : "1.0"
+  }, {
+    "consistencyGroup" : 1,
+    "elementCount" : 0,
+    "name" : "cyGroups",
+    "version" : "1.0"
+  }, {
+    "consistencyGroup" : 1,
+    "elementCount" : 2,
+    "name" : "networkRelations",
+    "version" : "1.0"
   } ]
 }, {
   "status" : [ {
