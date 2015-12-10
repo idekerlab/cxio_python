@@ -37,6 +37,10 @@ class NdexCXHelper:
         self.__cx_writer.write_single_aspect_fragment(
             ElementMaker.create_ndex_context_element(self.__contexts))
 
+    def emit_cx_cartesian_layout_element(self, node_id, view_id, x, y, z=None):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_cartesian_layout_element(node_id, view_id, x, y, z))
+
     def emit_cx_citation(self, citation_type, title, contributors, identifier, description):
         self.__citation_id_counter += 1
         self.__cx_writer.write_single_aspect_fragment(
@@ -57,9 +61,9 @@ class NdexCXHelper:
                                                      target_id, interaction))
         return self.__edge_id_counter
 
-    def emit_cx_edge_attribute(self, edge_id, name, value):
+    def emit_cx_edge_attribute(self, edge_id, name, value, data_type=None):
         self.__cx_writer.write_single_aspect_fragment(
-            ElementMaker.create_edge_attributes_aspect_element(edge_id, name, value))
+            ElementMaker.create_edge_attributes_aspect_element(edge_id, name, value, data_type))
 
     def emit_cx_node(self, node_name):
         self.__node_id_counter += 1
@@ -67,9 +71,9 @@ class NdexCXHelper:
             ElementMaker.create_nodes_aspect_element(self.__node_id_counter, node_name))
         return self.__node_id_counter
 
-    def emit_cx_node_attribute(self, node_id, name, value, att_type=None):
+    def emit_cx_node_attribute(self, node_id, name, value, data_type=None):
         self.__cx_writer.write_single_aspect_fragment(
-            ElementMaker.create_node_attributes_aspect_element(node_id, name, value, att_type))
+            ElementMaker.create_node_attributes_aspect_element(node_id, name, value, data_type))
 
     def emit_cx_function_term(self, function_term):
         self.__cx_writer.write_single_aspect_fragment(

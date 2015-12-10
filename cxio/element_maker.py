@@ -33,7 +33,22 @@ class ElementMaker(object):
         return AspectElement(CxConstants.EDGES, e)
 
     @staticmethod
-    def create_edge_attributes_aspect_element(edge_id, name, value):
+    def create_cartesian_layout_element(node_id, view_id, x, y, z=None):
+        """
+        :rtype: AspectElement
+        """
+        e = {'node': node_id,
+             'x': x,
+             'y': y
+             }
+        if view_id:
+            e['view'] = view_id
+        if z:
+            e['z'] = z
+        return AspectElement(CxConstants.CARTESIAN_LAYOUT, e)
+
+    @staticmethod
+    def create_edge_attributes_aspect_element(edge_id, name, value, data_type=None):
         """
         :rtype: AspectElement
         """
@@ -41,10 +56,12 @@ class ElementMaker(object):
              'n': name,
              'v': value
              }
+        if data_type:
+            e['d'] = data_type
         return AspectElement(CxConstants.EDGE_ATTRIBUTES, e)
 
     @staticmethod
-    def create_node_attributes_aspect_element(node_id, name, value, att_type=None):
+    def create_node_attributes_aspect_element(node_id, name, value, data_type=None):
         """
         :rtype: AspectElement
         """
@@ -52,8 +69,8 @@ class ElementMaker(object):
              'n': name,
              'v': value
              }
-        if att_type:
-            e['t'] = att_type
+        if data_type:
+            e['d'] = data_type
         return AspectElement(CxConstants.NODE_ATTRIBUTES, e)
 
     @staticmethod

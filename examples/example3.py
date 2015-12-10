@@ -25,9 +25,15 @@ w.emit_cx_node("node 2")
 
 w.emit_cx_edge(1, 2, "1->2")
 
+w.emit_cx_cartesian_layout_element(1, None, 20, 30)
+
+w.emit_cx_cartesian_layout_element(1, None, -20, -30)
+
 w.emit_cx_node_attribute(1, "node attribute 1", "value 1", "string")
 
-w.emit_cx_edge_attribute(1, "edge attribute 1", "value 1")
+w.emit_cx_node_attribute(2, "node attribute 2", "1293827302", "long")
+
+w.emit_cx_edge_attribute(1, "edge attribute 1", "value 1", "string")
 
 w.emit_cx_node_citation(1, 22)
 
@@ -83,6 +89,9 @@ for e in cx2[CxConstants.NODES]:
     print(e)
 
 for e in cx2[CxConstants.EDGES]:
+    print(e)
+
+for e in cx2[CxConstants.CARTESIAN_LAYOUT]:
     print(e)
 
 for e in cx2[CxConstants.NODE_ATTRIBUTES]:
