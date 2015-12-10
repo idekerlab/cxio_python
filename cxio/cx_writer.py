@@ -4,9 +4,17 @@ import collections
 from cxio.cx_constants import CxConstants
 from cxio.cx_util import CxUtil
 
+
 class CxWriter(object):
 
+    """ This is to write CX data to a output stream.
+    """
+
     def __init__(self, out):
+        """ Creates a new CxWriter for writing to "out".
+        :param out: object
+                    A file-like object to write to
+        """
         if out is None:
             raise AssertionError('output stream must not be none')
         self.__out = out
@@ -20,6 +28,10 @@ class CxWriter(object):
         self.__in_fragment = False
 
     def add_pre_meta_data(self, pre_meta_data):
+        """ To add pre meta data, to be written prior to the aspect elements.
+        :param pre_meta_data: list
+                              A list of Elements representing pre-meta data
+        """
         if pre_meta_data is None:
             raise AssertionError('pre meta data must not be none')
         if self.__ended:
@@ -29,6 +41,10 @@ class CxWriter(object):
         self.__add_meta_data(self.__pre_meta_data, pre_meta_data)
 
     def add_post_meta_data(self, post_meta_data):
+        """ To add post meta data, to be written after the aspect elements.
+        :param post_meta_data: list
+                               A list of Elements representing post-meta data
+        """
         if post_meta_data is None:
             raise AssertionError('post meta data must not be none')
         if self.__ended:

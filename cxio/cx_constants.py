@@ -1,7 +1,8 @@
-__author__ = 'cmzmasek'
-
 
 class CxConstants(object):
+
+    """ This is to hold constants relevant for CX data.
+    """
 
     META_DATA = 'metaData'
     NUMBER_VERIFICATION = 'numberVerification'

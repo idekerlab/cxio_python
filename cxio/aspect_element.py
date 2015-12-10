@@ -1,5 +1,11 @@
 class AspectElement(object):
 
+    """ This is to represent one aspect element.
+    Attributes:
+        name  The name of the aspect
+        data  The actual data of the aspect (a dictionary)
+    """
+
     def __init__(self, name, data):
         if name is None:
             raise AssertionError('aspect element name must not be none')
