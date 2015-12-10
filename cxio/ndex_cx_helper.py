@@ -11,6 +11,7 @@ from cxio.element_maker import ElementMaker
 
 
 class NdexCXHelper:
+
     def __init__(self, output_stream):
         self.out = output_stream
         self.contexts = {}
@@ -35,7 +36,6 @@ class NdexCXHelper:
     def add_cx_context(self, prefix, uri):
         self.contexts[prefix] = uri
 
-
     def emit_post_metadata(self):
         aspect_meta_data = [
             {"name": "nodes",
@@ -49,35 +49,20 @@ class NdexCXHelper:
         ]
         self.emit({'metaData': aspect_meta_data})
 
-    def emit_cx_fragment(self, aspect_name, body):
-        self.emit({aspect_name: [body]})
-
     def emit_cx_context(self):
         self.emit_cx_fragment('@context', self.contexts)
 
     def emit_cx_citation(self, citation_type, title, contributors, identifier, description):
         self.citation_id_counter += 1
-        self.emit_cx_fragment(
-            'citations', {
-                '@id': self.citation_id_counter,
-                'dc:title': title,
-                'dc:contributor': contributors,
-                'dc:identifier': identifier,
-                'dc:type': citation_type,
-                'dc:description': description,
-                'attributes': []
-            })
+        self.cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_ndex_citation_aspect_element(self.citation_id_counter, citation_type, title,
+                                                             contributors, identifier, description))
         return self.citation_id_counter
 
     def emit_cx_support(self, cx_citation_id, text):
         self.support_id_counter += 1
-        self.emit_cx_fragment(
-            'supports', {
-                '@id': self.support_id_counter,
-                'citation': cx_citation_id,
-                'text': text,
-                'attributes': []
-            })
+        self.cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_ndex_support_aspect_element(self.support_id_counter, cx_citation_id, text))
         return self.support_id_counter
 
     def emit_cx_edge(self, source_id, target_id, interaction):
@@ -89,7 +74,7 @@ class NdexCXHelper:
 
     def emit_cx_edge_attribute(self, edge_id, name, value):
         self.cx_writer.write_single_aspect_fragment(
-            ElementMaker.create_edges_attribute_aspect_element(edge_id, name, value))
+            ElementMaker.create_edge_attributes_aspect_element(edge_id, name, value))
 
     def emit_cx_node(self, node_name):
         self.node_id_counter += 1
@@ -99,42 +84,24 @@ class NdexCXHelper:
 
     def emit_cx_node_attribute(self, node_id, name, value, att_type=None):
         self.cx_writer.write_single_aspect_fragment(
-            ElementMaker.create_nodes_attribute_aspect_element(node_id, name, value, att_type))
+            ElementMaker.create_node_attributes_aspect_element(node_id, name, value, att_type))
 
     def emit_cx_function_term(self, function_term):
-        self.emit_cx_fragment('functionTerms', function_term)
+        self.cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_ndex_function_term_aspect_element(function_term))
 
     def emit_cx_node_citation(self, node_id, citation_id):
-        self.emit_cx_fragment(
-            'nodeCitations',
-            {
-                "citations": [citation_id],
-                "po": [node_id]
-            }
-        )
+        self.cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_ndex_node_citation_aspect_element(node_id, citation_id))
 
     def emit_cx_edge_citation(self, edge_id, citation_id):
-        self.emit_cx_fragment(
-            'edgeCitations', {
-                "citations": [citation_id],
-                "po": [edge_id]
-            }
-        )
+        self.cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_ndex_edge_citation_aspect_element(edge_id, citation_id))
 
     def emit_cx_node_support(self, node_id, support_id):
-        self.emit_cx_fragment(
-            'nodeSupports',
-            {
-                "supports": [support_id],
-                "po": [node_id]
-            }
-        )
+        self.cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_ndex_node_support_aspect_element(node_id, support_id))
 
     def emit_cx_edge_support(self, edge_id, support_id):
-        self.emit_cx_fragment(
-            'edgeSupports',
-            {
-                "supports": [support_id],
-                "po": [edge_id]
-            }
-        )
+        self.cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_ndex_edge_support_aspect_element(edge_id, support_id))

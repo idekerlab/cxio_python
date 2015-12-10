@@ -34,7 +34,7 @@ class ElementMaker(object):
         return AspectElement(CxConstants.EDGES, e)
 
     @staticmethod
-    def create_edge_attribute_aspect_element(edge_id, name, value):
+    def create_edge_attributes_aspect_element(edge_id, name, value):
         """
         :rtype: AspectElement
         """
@@ -45,7 +45,7 @@ class ElementMaker(object):
         return AspectElement(CxConstants.EDGE_ATTRIBUTES, e)
 
     @staticmethod
-    def create_node_attribute_aspect_element(node_id, name, value, att_type=None):
+    def create_node_attributes_aspect_element(node_id, name, value, att_type=None):
         """
         :rtype: AspectElement
         """
@@ -131,6 +131,16 @@ class ElementMaker(object):
              'po': [node_id]
              }
         return AspectElement('nodeCitations', e)
+
+    @staticmethod
+    def create_ndex_edge_citation_aspect_element(edge_id, citation_id):
+        """
+        :rtype: AspectElement
+        """
+        e = {'citations': [citation_id],
+             'po': [edge_id]
+             }
+        return AspectElement('edgeCitations', e)
 
     @staticmethod
     def create_ndex_node_support_aspect_element(node_id, support_id):
