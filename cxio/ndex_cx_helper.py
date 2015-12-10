@@ -27,22 +27,15 @@ class NdexCXHelper:
 
     def start(self):
         self.update_time = int(round(time.time() * 1000))
+        self.__add_pre_metadata()
         self.cx_writer.start()
 
     def end(self):
+        self.__add_post_metadata()
         self.cx_writer.end()
 
     def add_cx_context(self, prefix, uri):
         self.contexts[prefix] = uri
-
-    def add_post_metadata(self):
-        post_meta_data = [
-            ElementMaker.create_post_metadata_element('nodes', self.node_id_counter),
-            ElementMaker.create_post_metadata_element('edges', self.edge_id_counter),
-            ElementMaker.create_post_metadata_element('supports', self.support_id_counter),
-            ElementMaker.create_post_metadata_element('citations', self.citation_id_counter)
-        ]
-        self.cx_writer.add_post_meta_data(post_meta_data)
 
     def emit_cx_context(self):
         self.cx_writer.write_single_aspect_fragment(
@@ -101,3 +94,18 @@ class NdexCXHelper:
     def emit_cx_edge_support(self, edge_id, support_id):
         self.cx_writer.write_single_aspect_fragment(
             ElementMaker.create_ndex_edge_support_aspect_element(edge_id, support_id))
+
+    def __add_pre_metadata(self):
+        pre_meta_data = []
+        for aspect_name in self.aspect_names:
+            pre_meta_data.append(ElementMaker.create_pre_metadata_element(aspect_name, 1, '1.0', self.update_time))
+        self.cx_writer.add_pre_meta_data(pre_meta_data)
+
+    def __add_post_metadata(self):
+        post_meta_data = [
+            ElementMaker.create_post_metadata_element('nodes', self.node_id_counter),
+            ElementMaker.create_post_metadata_element('edges', self.edge_id_counter),
+            ElementMaker.create_post_metadata_element('supports', self.support_id_counter),
+            ElementMaker.create_post_metadata_element('citations', self.citation_id_counter)
+        ]
+        self.cx_writer.add_post_meta_data(post_meta_data)
