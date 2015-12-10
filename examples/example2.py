@@ -104,6 +104,9 @@ print()
 print()
 
 cx2 = cx_reader2.parse_as_dictionary()
+# Note: In real-world application, this would be used instead:
+# for e in cx_reader2.aspect_elements():
+#     do something with e
 
 for e in cx2[CxConstants.NODES]:
     print(e)
@@ -125,4 +128,6 @@ print('post meta data:')
 for e in cx_reader2.get_post_meta_data():
     print(e)
 
-
+print()
+print()
+print('OK')
