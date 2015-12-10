@@ -145,6 +145,21 @@ class CxWriter(object):
         else:
             self.__aspect_element_counts[my_name] += 1
 
+
+     def write_single_aspect_fragment(self, aspect_element):
+        """ Convenience method to write a aspect element as "aspect fragment").
+        Not efficient.
+        :param cx_writer: CxWriter
+            A CxWriter ready to write aspect elements.
+        :param aspect_elements: AspectElement
+        """
+
+        name = aspect_element.get_name()
+        self.start_aspect_fragment(name)
+        self.write_aspect_element(aspect_element)
+        self.end_aspect_fragment()
+
+
     def __write_number_verification_element(self):
         e = ElementMaker.create_number_verification_element()
         self.__out.write('\n')
