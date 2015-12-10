@@ -7,6 +7,10 @@ class AspectElement(object):
     """
 
     def __init__(self, name, data):
+        """ Creates a new AspectElement.
+        :param name: string
+        :param data: dict
+        """
         if name is None:
             raise AssertionError('aspect element name must not be none')
         if data is None:
@@ -15,9 +19,15 @@ class AspectElement(object):
         self.__data = data
 
     def get_name(self):
+        """ Returns the name of the aspect element.
+        :rtype: string
+        """
         return self.__name
 
     def get_data(self):
+        """ Returns the data of the aspect element.
+        :rtype: dict
+        """
         return self.__data
 
     def __str__(self):

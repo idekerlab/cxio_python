@@ -9,7 +9,7 @@ class CxUtil(object):
 
     @staticmethod
     def write_aspect_fragment(cx_writer, aspect_elements):
-        """ Convenience method to write a list of aspect elements to a stream
+        """ Convenience method to write a list of aspect elements ("aspect fragment").
         :param cx_writer: CxWriter
             A CxWriter ready to write aspect elements.
         :param aspect_elements: list

@@ -7,7 +7,7 @@ from cxio.cx_util import CxUtil
 
 class CxWriter(object):
 
-    """ This is to write CX data to a output stream.
+    """ This is to write CX data to a output stream (a file-like object).
     """
 
     def __init__(self, out):
@@ -52,6 +52,8 @@ class CxWriter(object):
         self.__add_meta_data(self.__post_meta_data, post_meta_data)
 
     def start(self):
+        """ To start writing CX formatted data.
+        """
         if self.__ended:
             raise IOError('already ended')
         if self.__started:
@@ -63,6 +65,8 @@ class CxWriter(object):
             self.__write_meta_data(self.__pre_meta_data)
 
     def end(self):
+        """ To end writing CX formatted data.
+        """
         if self.__ended:
             raise IOError('already ended')
         if not self.__started:
@@ -77,6 +81,10 @@ class CxWriter(object):
         self.__out.write(']')
 
     def start_aspect_fragment(self, aspect_name):
+        """ To start writing a aspect fragment (list of aspect elements of the same category).
+        :param aspect_name: String
+                            The aspect name
+        """
         if aspect_name is None:
             raise AssertionError('aspect name data must not be none')
         if self.__ended:
@@ -102,6 +110,8 @@ class CxWriter(object):
         self.__out.write('\n')
 
     def end_aspect_fragment(self):
+        """ To end writing a aspect fragment (list of aspect elements of the same category).
+        """
         if self.__ended:
             raise IOError('already ended')
         if not self.__fragment_started:
@@ -114,6 +124,10 @@ class CxWriter(object):
         self.__in_fragment = False
 
     def write_aspect_element(self, element):
+        """ To write one aspect element to a aspect fragment.
+        :param element: AspectElement
+                        The aspect element to be written
+        """
         if self.__ended:
             raise IOError('already ended')
         if not self.__fragment_started:

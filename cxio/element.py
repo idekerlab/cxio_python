@@ -7,6 +7,10 @@ class Element(object):
         data  The actual data of the element (a dictionary)
     """
     def __init__(self, name, data):
+        """ Creates a new Element.
+        :param name: string
+        :param data: dict
+        """
         if name is None:
             raise AssertionError('element name must not be none')
         if data is None:
@@ -15,9 +19,15 @@ class Element(object):
         self.__data = data
 
     def get_name(self):
+        """ Returns the name of the element.
+        :rtype: string
+        """
         return self.__name
 
     def get_data(self):
+        """ Returns the data of the element.
+        :rtype: dict
+        """
         return self.__data
 
     def __str__(self):
