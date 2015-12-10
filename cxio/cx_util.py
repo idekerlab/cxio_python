@@ -1,4 +1,5 @@
 from cxio.element import Element
+from cxio.aspect_element import AspectElement
 from cxio.cx_constants import CxConstants
 
 
@@ -34,7 +35,7 @@ class CxUtil(object):
             e = {'@id': node_id, 'n': node_name}
         else:
             e = {'@id': node_id, 'n': node_name, 'r': node_represents}
-        return Element(CxConstants.NODES, e)
+        return AspectElement(CxConstants.NODES, e)
 
 
     @staticmethod
