@@ -4,7 +4,6 @@ from cxio.cx_constants import CxConstants
 
 
 class ElementMaker(object):
-
     """ Static methods for creating (aspect) element instances.
     """
 
@@ -86,6 +85,16 @@ class ElementMaker(object):
         """
         e = [dict(longNumber=CxConstants.NUMBER_VERIFICATION_VALUE)]
         return Element(CxConstants.NUMBER_VERIFICATION, e)
+
+    @staticmethod
+    def create_status_element(success=True, error_msg='' ):
+        """ Convenience method to create a status element
+        :rtype: Element
+        """
+        e = [{'error': error_msg,
+              'success': success,
+              }]
+        return Element(CxConstants.STATUS, e)
 
     @staticmethod
     def create_ndex_citation_aspect_element(citation_id, citation_type, title, contributors, identifier, description):

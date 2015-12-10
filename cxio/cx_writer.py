@@ -65,7 +65,7 @@ class CxWriter(object):
         if len(self.__pre_meta_data) > 0:
             self.__write_meta_data(self.__pre_meta_data)
 
-    def end(self):
+    def end(self, success=True, error_msg=''):
         """ To end writing CX formatted data.
         """
         if self.__ended:
@@ -76,6 +76,7 @@ class CxWriter(object):
             raise IOError('fragment not ended')
         if len(self.__post_meta_data) > 0:
             self.__write_meta_data(self.__post_meta_data)
+        self.__write_status_element(success, error_msg)
         self.__ended = True
         self.__started = False
         self.__out.write('\n')
@@ -169,6 +170,19 @@ class CxWriter(object):
         self.__out.write(' ')
         self.__out.write(self.__aspect_element_to_json(e))
         self.__out.write(' },')
+
+    def __write_status_element(self, success=True, error_msg=''):
+        e = ElementMaker.create_status_element(success,error_msg)
+        self.__out.write(',')
+        self.__out.write('\n')
+        self.__out.write(' { ')
+        self.__out.write('"')
+        self.__out.write(e.get_name())
+        self.__out.write('"')
+        self.__out.write(':')
+        self.__out.write(' ')
+        self.__out.write(self.__aspect_element_to_json(e))
+        self.__out.write(' }')
 
     def __write_meta_data(self, meta_data):
         self.start_aspect_fragment(CxConstants.META_DATA)
