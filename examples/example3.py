@@ -1,9 +1,6 @@
 import io
-from cxio.aspect_element import AspectElement
 from cxio.cx_reader import CxReader
-from cxio.cx_writer import CxWriter
 from cxio.cx_constants import CxConstants
-from cxio.cx_util import CxUtil
 from cxio.ndex_cx_helper import NdexCXHelper
 
 # -------
