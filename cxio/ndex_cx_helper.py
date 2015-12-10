@@ -1,17 +1,10 @@
 import time
-from cxio.element import Element
-from cxio.aspect_element import AspectElement
-from cxio.cx_constants import CxConstants
-from cxio.aspect_element import AspectElement
-from cxio.cx_reader import CxReader
+
 from cxio.cx_writer import CxWriter
-from cxio.cx_constants import CxConstants
-from cxio.cx_util import CxUtil
 from cxio.element_maker import ElementMaker
 
 
 class NdexCXHelper:
-
     def __init__(self, output_stream):
         self.contexts = {}
         self.citation_id_counter = 0
