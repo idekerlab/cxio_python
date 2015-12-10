@@ -13,7 +13,6 @@ from cxio.element_maker import ElementMaker
 class NdexCXHelper:
 
     def __init__(self, output_stream):
-        self.out = output_stream
         self.contexts = {}
         self.citation_id_counter = 0
         self.support_id_counter = 0
@@ -36,21 +35,18 @@ class NdexCXHelper:
     def add_cx_context(self, prefix, uri):
         self.contexts[prefix] = uri
 
-    def emit_post_metadata(self):
-        aspect_meta_data = [
-            {"name": "nodes",
-             "idCounter": self.node_id_counter},
-            {"name": "edges",
-             "idCounter": self.edge_id_counter},
-            {"name": "supports",
-             "idCounter": self.support_id_counter},
-            {"name": "citations",
-             "idCounter": self.citation_id_counter},
+    def add_post_metadata(self):
+        post_meta_data = [
+            ElementMaker.create_post_metadata_element('nodes', self.node_id_counter),
+            ElementMaker.create_post_metadata_element('edges', self.edge_id_counter),
+            ElementMaker.create_post_metadata_element('supports', self.support_id_counter),
+            ElementMaker.create_post_metadata_element('citations', self.citation_id_counter)
         ]
-        self.emit({'metaData': aspect_meta_data})
+        self.cx_writer.add_post_meta_data(post_meta_data)
 
     def emit_cx_context(self):
-        self.emit_cx_fragment('@context', self.contexts)
+        self.cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_ndex_context_element(self.contexts))
 
     def emit_cx_citation(self, citation_type, title, contributors, identifier, description):
         self.citation_id_counter += 1
