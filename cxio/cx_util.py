@@ -3,7 +3,6 @@ from cxio.cx_constants import CxConstants
 
 
 class CxUtil(object):
-
     """ Static utility and convenience methods.
     """
 
@@ -23,6 +22,20 @@ class CxUtil(object):
                     raise ValueError('"' + str(name) + '" different from "' + str(aspect_element.get_name() + '"'))
                 cx_writer.write_aspect_element(aspect_element)
             cx_writer.end_aspect_fragment()
+
+    @staticmethod
+    def create_nodes_aspect_element(node_id, node_name=None, node_represents=None):
+        """ Convenience method to create a nodes aspect element
+        :rtype: AspectElement
+        """
+        if node_name is None and node_represents is None:
+            e = {'@id': node_id}
+        elif node_represents is None:
+            e = {'@id': node_id, 'n': node_name}
+        else:
+            e = {'@id': node_id, 'n': node_name, 'r': node_represents}
+        return Element(CxConstants.NODES, e)
+
 
     @staticmethod
     def create_number_verification_element():

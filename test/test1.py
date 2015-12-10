@@ -39,6 +39,9 @@ class MyTestCase(unittest.TestCase):
 
         #self.assertEqual()
 
+    def test_2(self):
+        n = CxUtil.create_nodes_aspect_element(1, 'name', 'represents')
+        print(str(n))
 
 if __name__ == '__main__':
     unittest.main()
