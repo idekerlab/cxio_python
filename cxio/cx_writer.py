@@ -3,6 +3,7 @@ import decimal
 import collections
 from cxio.cx_constants import CxConstants
 from cxio.cx_util import CxUtil
+from cxio.element_maker import ElementMaker
 
 
 class CxWriter(object):
@@ -145,7 +146,7 @@ class CxWriter(object):
             self.__aspect_element_counts[my_name] += 1
 
     def __write_number_verification_element(self):
-        e = CxUtil.create_number_verification_element()
+        e = ElementMaker.create_number_verification_element()
         self.__out.write('\n')
         self.__out.write(' { ')
         self.__out.write('"')
