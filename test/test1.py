@@ -9,7 +9,6 @@ import unittest
 
 
 class MyTestCase(unittest.TestCase):
-
     def test_1(self):
         print('\n---------- cxio tests start -----------\n')
 
@@ -37,7 +36,7 @@ class MyTestCase(unittest.TestCase):
 
         w.end()
 
-        #self.assertEqual()
+        # self.assertEqual()
 
     def test_2(self):
         n1 = ElementMaker.create_nodes_aspect_element(1, 'node 1', 'N1')
@@ -46,7 +45,15 @@ class MyTestCase(unittest.TestCase):
         s = ElementMaker.create_status_element(True, "msg")
         nea = ElementMaker.create_network_attributes_aspect_element(1200, 'size', 12.3, CxConstants.DATA_TYPE_DOUBLE)
         noa = ElementMaker.create_node_attributes_aspect_element(1200, 1, 'weight', '12.0', CxConstants.DATA_TYPE_FLOAT)
-        eda = ElementMaker.create_edge_attributes_aspect_element(1200, 3, 'length', 303.409883, CxConstants.DATA_TYPE_DOUBLE)
+        eda = ElementMaker.create_edge_attributes_aspect_element(1200, 3, 'length', 303.409883,
+                                                                 CxConstants.DATA_TYPE_DOUBLE)
+        neal = ElementMaker.create_network_list_attributes_aspect_element(1200, 'used', [True, False],
+                                                                          CxConstants.DATA_TYPE_LIST_OF_BOOLEAN)
+        noal = ElementMaker.create_node_list_attributes_aspect_element(1200, 1, 'weights', ['1.1', '2.2'],
+                                                                       CxConstants.DATA_TYPE_LIST_OF_FLOAT)
+        edal = ElementMaker.create_edge_list_attributes_aspect_element(1200, 3, 'lengths', ['23.3', '13.34'],
+                                                                       CxConstants.DATA_TYPE_LIST_OF_DOUBLE)
+        c1 = ElementMaker.create_cartesian_layout_element(1, 1200, 1.11, 2.22, 3.33)
 
         print(str(n1))
         print(str(n2))
@@ -55,6 +62,11 @@ class MyTestCase(unittest.TestCase):
         print(str(nea))
         print(str(noa))
         print(str(eda))
+        print(str(neal))
+        print(str(noal))
+        print(str(edal))
+        print(str(c1))
+
 
 if __name__ == '__main__':
     unittest.main()
