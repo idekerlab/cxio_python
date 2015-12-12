@@ -2,7 +2,6 @@ import json
 import decimal
 import collections
 from cxio.cx_constants import CxConstants
-from cxio.cx_util import CxUtil
 from cxio.element_maker import ElementMaker
 
 

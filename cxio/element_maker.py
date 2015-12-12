@@ -48,40 +48,116 @@ class ElementMaker(object):
         return AspectElement(CxConstants.CARTESIAN_LAYOUT, e)
 
     @staticmethod
-    def create_edge_attributes_aspect_element(edge_id, name, value, data_type=None):
+    def create_network_attributes_aspect_element(sub_network_id, name, value, data_type=None):
+        """
+        :rtype: AspectElement
+        """
+        e = {'n': name,
+             'v': str(value)
+             }
+        if data_type:
+            if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
+                raise IOError('illegal data type for network attribute "' + name + '": ' + data_type)
+            if data_type != CxConstants.DATA_TYPE_STRING:
+                e['d'] = data_type
+        if sub_network_id:
+            e['s'] = sub_network_id
+        return AspectElement(CxConstants.NETWORK_ATTRIBUTES, e)
+
+    @staticmethod
+    def create_network_list_attributes_aspect_element(sub_network_id, name, values, data_type):
+        """
+        :rtype: AspectElement
+        """
+        if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
+            raise IOError('illegal data type for list network attribute "' + name + '": ' + data_type)
+        e = {'n': name,
+             'v': values,
+             'd': data_type
+             }
+        if sub_network_id:
+            e['s'] = sub_network_id
+        return AspectElement(CxConstants.NETWORK_ATTRIBUTES, e)
+
+    @staticmethod
+    def create_edge_attributes_aspect_element(sub_network_id, edge_id, name, value, data_type=None):
         """
         :rtype: AspectElement
         """
         e = {'po': edge_id,
              'n': name,
-             'v': value
+             'v': str(value)
              }
         if data_type:
-            e['d'] = data_type
+            if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
+                raise IOError('illegal data type for edge attribute "' + name + '": ' + data_type)
+            if data_type != CxConstants.DATA_TYPE_STRING:
+                e['d'] = data_type
+        if sub_network_id:
+            e['s'] = sub_network_id
         return AspectElement(CxConstants.EDGE_ATTRIBUTES, e)
 
     @staticmethod
-    def create_node_attributes_aspect_element(node_id, name, value, data_type=None):
+    def create_edge_list_attributes_aspect_element(sub_network_id, edge_id, name, values, data_type):
+        """
+        :rtype: AspectElement
+        """
+        if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
+            raise IOError('illegal data type for list edge attribute "' + name + '": ' + data_type)
+        e = {'po': edge_id,
+             'n': name,
+             'v': values,
+             'd': data_type
+             }
+        if sub_network_id:
+            e['s'] = sub_network_id
+        return AspectElement(CxConstants.EDGE_ATTRIBUTES, e)
+
+    @staticmethod
+    def create_node_attributes_aspect_element(sub_network_id, node_id, name, value, data_type=None):
         """
         :rtype: AspectElement
         """
         e = {'po': node_id,
              'n': name,
-             'v': value
+             'v': str(value)
              }
         if data_type:
-            e['d'] = data_type
+            if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
+                raise IOError('illegal data type for node attribute "' + name + '": ' + data_type)
+            if data_type != CxConstants.DATA_TYPE_STRING:
+                e['d'] = data_type
+        if sub_network_id:
+            e['s'] = sub_network_id
         return AspectElement(CxConstants.NODE_ATTRIBUTES, e)
 
     @staticmethod
-    def create_pre_metadata_element(aspect_name, consistency_group, version, last_update):
+    def create_node_list_attributes_aspect_element(sub_network_id, node_id, name, values, data_type):
+        """
+        :rtype: AspectElement
+        """
+        if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
+            raise IOError('illegal data type for list node attribute "' + name + '": ' + data_type)
+        e = {'po': node_id,
+             'n': name,
+             'v': values,
+             'd': data_type
+             }
+        if sub_network_id:
+            e['s'] = sub_network_id
+        return AspectElement(CxConstants.NODE_ATTRIBUTES, e)
+
+    @staticmethod
+    def create_pre_metadata_element(aspect_name, consistency_group, version, last_update, properties, id_counter):
         """
         :rtype: Element
         """
         e = {'name': aspect_name,
              'consistencyGroup': consistency_group,
              'version': version,
-             'lastUpdate': last_update
+             'lastUpdate': last_update,
+             'properties': properties,
+             'idCounter': id_counter
              }
         return Element(CxConstants.META_DATA, e)
 

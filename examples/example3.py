@@ -29,11 +29,15 @@ w.emit_cx_cartesian_layout_element(1, None, 20, 30)
 
 w.emit_cx_cartesian_layout_element(1, None, -20, -30)
 
-w.emit_cx_node_attribute(1, "node attribute 1", "value 1", "string")
+w.emit_cx_node_attribute(1, "node attribute 1", "value 1", CxConstants.DATA_TYPE_STRING)
 
-w.emit_cx_node_attribute(2, "node attribute 2", "1293827302", "long")
+w.emit_cx_node_attribute(2, "node attribute 2", "1293827302", CxConstants.DATA_TYPE_LONG)
 
-w.emit_cx_edge_attribute(1, "edge attribute 1", "value 1", "string")
+w.emit_cx_edge_attribute(1, "edge attribute 1", "value 1", CxConstants.DATA_TYPE_STRING)
+
+w.emit_cx_network_attribute(1, "size", "12", CxConstants.DATA_TYPE_INTEGER)
+
+w.emit_cx_network_list_attribute(1, "expressions", ["12", "13"], CxConstants.DATA_TYPE_LIST_OF_INTEGER)
 
 w.emit_cx_node_citation(1, 22)
 

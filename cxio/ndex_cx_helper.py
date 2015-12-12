@@ -2,6 +2,7 @@ import time
 
 from cxio.cx_writer import CxWriter
 from cxio.element_maker import ElementMaker
+from cxio.cx_constants import CxConstants
 
 
 class NdexCXHelper:
@@ -13,10 +14,10 @@ class NdexCXHelper:
         self.__node_id_counter = 0
         self.__update_time = -1
         self.__cx_writer = CxWriter(output_stream)
-        self.__aspect_names = ["@context", "citations", "edgeAttributes",
-                             "edgeCitations", "edgeSupports", "edges",
-                             "networkAttributes", "nodeAttributes", "nodeCitations",
-                             "nodeSupports", "nodes", "provenanceHistory", "supports"]
+        self.__aspect_names = ["@context", CxConstants.NODES, CxConstants.EDGES, CxConstants.NETWORK_ATTRIBUTES,
+                               CxConstants.NODE_ATTRIBUTES, CxConstants.EDGE_ATTRIBUTES, CxConstants.CARTESIAN_LAYOUT,
+                               "citations", "nodeCitations", "edgeCitations",
+                               "nodeSupports", "edgeSupports", "provenanceHistory", "supports"]
 
     def get_cx_writer(self):
         return self.__cx_writer
@@ -37,6 +38,43 @@ class NdexCXHelper:
         self.__cx_writer.write_single_aspect_fragment(
             ElementMaker.create_ndex_context_element(self.__contexts))
 
+    def emit_cx_node(self, node_name):
+        self.__node_id_counter += 1
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_nodes_aspect_element(self.__node_id_counter, node_name))
+        return self.__node_id_counter
+
+    def emit_cx_edge(self, source_id, target_id, interaction):
+        self.__edge_id_counter += 1
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_edges_aspect_element(self.__edge_id_counter, source_id,
+                                                     target_id, interaction))
+        return self.__edge_id_counter
+
+    def emit_cx_node_attribute(self, node_id, name, value, data_type=None):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_node_attributes_aspect_element(None, node_id, name, value, data_type))
+
+    def emit_cx_edge_attribute(self, edge_id, name, value, data_type=None):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_edge_attributes_aspect_element(None, edge_id, name, value, data_type))
+
+    def emit_cx_network_attribute(self, sub_network_id, name, value, data_type=None):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_network_attributes_aspect_element(sub_network_id, name, value, data_type))
+
+    def emit_cx_node_list_attribute(self, node_id, name, values, data_type):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_node_list_attributes_aspect_element(None, node_id, name, values, data_type))
+
+    def emit_cx_edge_list_attribute(self, edge_id, name, values, data_type):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_edge_list_attributes_aspect_element(None, edge_id, name, values, data_type))
+
+    def emit_cx_network_list_attribute(self, sub_network_id, name, values, data_type):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_network_list_attributes_aspect_element(sub_network_id, name, values, data_type))
+
     def emit_cx_cartesian_layout_element(self, node_id, view_id, x, y, z=None):
         self.__cx_writer.write_single_aspect_fragment(
             ElementMaker.create_cartesian_layout_element(node_id, view_id, x, y, z))
@@ -53,27 +91,6 @@ class NdexCXHelper:
         self.__cx_writer.write_single_aspect_fragment(
             ElementMaker.create_ndex_support_aspect_element(self.__support_id_counter, cx_citation_id, text))
         return self.__support_id_counter
-
-    def emit_cx_edge(self, source_id, target_id, interaction):
-        self.__edge_id_counter += 1
-        self.__cx_writer.write_single_aspect_fragment(
-            ElementMaker.create_edges_aspect_element(self.__edge_id_counter, source_id,
-                                                     target_id, interaction))
-        return self.__edge_id_counter
-
-    def emit_cx_edge_attribute(self, edge_id, name, value, data_type=None):
-        self.__cx_writer.write_single_aspect_fragment(
-            ElementMaker.create_edge_attributes_aspect_element(edge_id, name, value, data_type))
-
-    def emit_cx_node(self, node_name):
-        self.__node_id_counter += 1
-        self.__cx_writer.write_single_aspect_fragment(
-            ElementMaker.create_nodes_aspect_element(self.__node_id_counter, node_name))
-        return self.__node_id_counter
-
-    def emit_cx_node_attribute(self, node_id, name, value, data_type=None):
-        self.__cx_writer.write_single_aspect_fragment(
-            ElementMaker.create_node_attributes_aspect_element(node_id, name, value, data_type))
 
     def emit_cx_function_term(self, function_term):
         self.__cx_writer.write_single_aspect_fragment(
@@ -98,7 +115,8 @@ class NdexCXHelper:
     def __add_pre_metadata(self):
         pre_meta_data = []
         for aspect_name in self.__aspect_names:
-            pre_meta_data.append(ElementMaker.create_pre_metadata_element(aspect_name, 1, '1.0', self.__update_time))
+            pre_meta_data.append(ElementMaker.create_pre_metadata_element(aspect_name, 1, '1.0', self.__update_time,
+                                                                          [], 1))
         self.__cx_writer.add_pre_meta_data(pre_meta_data)
 
     def __add_post_metadata(self):
