@@ -38,7 +38,25 @@ class MyTestCase(unittest.TestCase):
 
         # self.assertEqual()
 
+
+        self.assertEquals(n1.get_data()['r'], 'N1')
+
     def test_2(self):
+        e = ElementMaker.create_nodes_aspect_element(1, 'node 1', 'N1')
+        self.assertEquals(e.get_name(), CxConstants.NODES)
+        self.assertEquals(e.get_data()['n'], 'node 1')
+        self.assertEquals(e.get_data()['@id'], 1)
+        self.assertEquals(e.get_data()['r'], 'N1')
+
+    def test_3(self):
+        e = ElementMaker.create_edges_aspect_element(3, 1, 2, '1->2')
+        self.assertEquals(e.get_name(), CxConstants.EDGES)
+        self.assertEquals(e.get_data()['s'], 1)
+        self.assertEquals(e.get_data()['t'], 2)
+        self.assertEquals(e.get_data()['@id'], 3)
+        self.assertEquals(e.get_data()['i'], '1->2')
+
+    def test_x(self):
         n1 = ElementMaker.create_nodes_aspect_element(1, 'node 1', 'N1')
         n2 = ElementMaker.create_nodes_aspect_element(2, 'node 2', 'N2')
         e = ElementMaker.create_edges_aspect_element(3, 1, 2, '1->2')
@@ -54,6 +72,8 @@ class MyTestCase(unittest.TestCase):
         edal = ElementMaker.create_edge_list_attributes_aspect_element(1200, 3, 'lengths', ['23.3', '13.34'],
                                                                        CxConstants.DATA_TYPE_LIST_OF_DOUBLE)
         c1 = ElementMaker.create_cartesian_layout_element(1, 1200, 1.11, 2.22, 3.33)
+
+
 
         print(str(n1))
         print(str(n2))
