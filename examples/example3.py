@@ -39,6 +39,8 @@ w.emit_cx_network_attribute(1, "size", "12", CxConstants.DATA_TYPE_INTEGER)
 
 w.emit_cx_network_list_attribute(1, "expressions", ["12", "13"], CxConstants.DATA_TYPE_LIST_OF_INTEGER)
 
+w.emit_cx_sub_networks(1200, [1, 2], [3, 4])
+
 w.emit_cx_node_citation(1, 22)
 
 w.emit_cx_edge_citation(2, 11)
@@ -102,6 +104,9 @@ for e in cx2[CxConstants.NODE_ATTRIBUTES]:
     print(e)
 
 for e in cx2[CxConstants.EDGE_ATTRIBUTES]:
+    print(e)
+
+for e in cx2[CxConstants.SUB_NETWORKS]:
     print(e)
 
 for e in cx2['nodeCitations']:

@@ -1,7 +1,6 @@
 import io
 from cxio.cx_reader import CxReader
 from cxio.cx_writer import CxWriter
-from cxio.aspect_element import AspectElement
 from cxio.cx_constants import CxConstants
 from cxio.element_maker import ElementMaker
 
@@ -126,6 +125,15 @@ class MyTestCase(unittest.TestCase):
         self.assertEquals(d['name'], 'nodes')
         self.assertEquals(d['idCounter'], 456)
 
+    def test_14(self):
+        e = ElementMaker.create_sub_networks_aspect_element(1200, [1, 2], [3])
+        self.assertEquals(e.get_name(), CxConstants.SUB_NETWORKS)
+        d = e.get_data()
+        self.assertEquals(d['@id'], 1200)
+        self.assertEquals(d['nodes'][0], 1)
+        self.assertEquals(d['nodes'][1], 2)
+        self.assertEquals(d['edges'][0], 3)
+
     def test_x(self):
         n1 = ElementMaker.create_nodes_aspect_element(1, 'node 1', 'N1')
         n2 = ElementMaker.create_nodes_aspect_element(2, 'node 2', 'N2')
@@ -142,6 +150,8 @@ class MyTestCase(unittest.TestCase):
                                                                        CxConstants.DATA_TYPE_LIST_OF_DOUBLE)
         c1 = ElementMaker.create_cartesian_layout_element(1, 1200, 1.11, 2.22, 3.33)
         c2 = ElementMaker.create_cartesian_layout_element(2, 1200, -1.11, -2.22)
+        sn = ElementMaker.create_sub_networks_aspect_element(1200, [1, 2], [3])
+
         prmd = ElementMaker.create_pre_metadata_element('nodes', 1, 'v2.2', 1234567, [], 2)
         pomd1 = ElementMaker.create_post_metadata_element('nodes', 2)
         pomd2 = ElementMaker.create_post_metadata_element('edges', 1)
@@ -183,6 +193,10 @@ class MyTestCase(unittest.TestCase):
         w.write_aspect_element(edal)
         w.end_aspect_fragment()
 
+        w.start_aspect_fragment(CxConstants.SUB_NETWORKS)
+        w.write_aspect_element(sn)
+        w.end_aspect_fragment()
+
         w.add_post_meta_data([pomd1, pomd2])
 
         w.end(True, "no error")
@@ -211,6 +225,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEquals(len(cx[CxConstants.NODE_ATTRIBUTES]), 2)
         self.assertEquals(len(cx[CxConstants.EDGE_ATTRIBUTES]), 2)
         self.assertEquals(len(cx[CxConstants.NETWORK_ATTRIBUTES]), 2)
+        self.assertEquals(len(cx[CxConstants.SUB_NETWORKS]), 1)
 
 
 

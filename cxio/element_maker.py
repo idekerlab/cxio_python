@@ -80,6 +80,38 @@ class ElementMaker(object):
         return AspectElement(CxConstants.NETWORK_ATTRIBUTES, e)
 
     @staticmethod
+    def create_hidden_attributes_aspect_element(sub_network_id, name, value, data_type=None):
+        """
+        :rtype: AspectElement
+        """
+        e = {'n': name,
+             'v': str(value)
+             }
+        if data_type:
+            if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
+                raise IOError('illegal data type for hidden attribute "' + name + '": ' + data_type)
+            if data_type != CxConstants.DATA_TYPE_STRING:
+                e['d'] = data_type
+        if sub_network_id:
+            e['s'] = sub_network_id
+        return AspectElement(CxConstants.HIDDEN_ATTRIBUTES, e)
+
+    @staticmethod
+    def create_hidden_list_attributes_aspect_element(sub_network_id, name, values, data_type):
+        """
+        :rtype: AspectElement
+        """
+        if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
+            raise IOError('illegal data type for list hidden attribute "' + name + '": ' + data_type)
+        e = {'n': name,
+             'v': values,
+             'd': data_type
+             }
+        if sub_network_id:
+            e['s'] = sub_network_id
+        return AspectElement(CxConstants.HIDDEN_ATTRIBUTE, e)
+
+    @staticmethod
     def create_edge_attributes_aspect_element(sub_network_id, edge_id, name, value, data_type=None):
         """
         :rtype: AspectElement
@@ -146,6 +178,89 @@ class ElementMaker(object):
         if sub_network_id:
             e['s'] = sub_network_id
         return AspectElement(CxConstants.NODE_ATTRIBUTES, e)
+
+    @staticmethod
+    def create_sub_networks_aspect_element(sub_network_id, node_ids, edge_ids):
+        """
+        :rtype: AspectElement
+        """
+        e = {'@id': sub_network_id,
+             'nodes': node_ids,
+             'edges': edge_ids
+             }
+        return AspectElement(CxConstants.SUB_NETWORKS, e)
+
+    @staticmethod
+    def create_views_aspect_element(view_id, sub_network_id):
+        """
+        :rtype: AspectElement
+        """
+        e = {'@id': view_id,
+             's': sub_network_id
+             }
+        return AspectElement(CxConstants.VIEWS, e)
+
+    @staticmethod
+    def create_network_relations_aspect_element(child, parent=None, relationship=None, name=None):
+        """
+        :rtype: AspectElement
+        """
+        e = {'c': child}
+        if parent:
+            e['p'] = parent
+        if relationship:
+            e['r'] = relationship
+        if name:
+            e['name'] = name
+        return AspectElement(CxConstants.NETWORK_RELATIONS, e)
+
+    @staticmethod
+    def create_groups_aspect_element(group_id, view_id, name, nodes, external_edges, internal_edges):
+        """
+        :rtype: AspectElement
+        """
+        e = {'@id': group_id,
+             'view': view_id,
+             'name': name,
+             'edges': nodes,
+             'external_edges': external_edges,
+             'internal_edges': internal_edges
+             }
+        return AspectElement(CxConstants.GROUPS, e)
+
+    @staticmethod
+    def create_table_column_aspect_element(sub_network, applies_to, name, data_type):
+        """
+        :rtype: AspectElement
+        """
+        if (data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES) and (data_type not in CxConstants.LIST_ATTRIBUTE_TYPES):
+            raise IOError('illegal data type for "' + name + '": ' + data_type)
+
+        e = {'s': sub_network,
+             'n': name,
+             'applies_to': applies_to,
+             'd': data_type
+             }
+        return AspectElement(CxConstants.TABLE_COLUMN, e)
+
+    @staticmethod
+    def create_visual_properties_aspect_element(properties_of, applies_to, view, properties, dependencies=None,
+                                                mappings=None):
+        """
+        :rtype: AspectElement
+        """
+        e = {'properties_of': properties_of,
+             'applies_to': applies_to,
+             }
+        if view:
+            e['view'] = view
+        if properties:
+            e['properties'] = properties
+        if dependencies:
+            e['dependencies'] = dependencies
+        if mappings:
+            e['mappings'] = mappings
+        return AspectElement(CxConstants.VISUAL_PROPERTIES, e)
 
     @staticmethod
     def create_pre_metadata_element(aspect_name, consistency_group, version, last_update, properties, id_counter):

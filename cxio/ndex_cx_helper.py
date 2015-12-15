@@ -79,6 +79,10 @@ class NdexCXHelper:
         self.__cx_writer.write_single_aspect_fragment(
             ElementMaker.create_cartesian_layout_element(node_id, view_id, x, y, z))
 
+    def emit_cx_sub_networks(self, sub_network_id, node_ids, edge_ids):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_sub_networks_aspect_element(sub_network_id, node_ids, edge_ids))
+
     def emit_cx_citation(self, citation_type, title, contributors, identifier, description):
         self.__citation_id_counter += 1
         self.__cx_writer.write_single_aspect_fragment(

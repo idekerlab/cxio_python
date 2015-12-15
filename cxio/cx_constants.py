@@ -15,6 +15,9 @@ class CxConstants(object):
     HIDDEN_ATTRIBUTES = 'hiddenAttributes'
     VISUAL_PROPERTIES = 'visualProperties'
     SUB_NETWORKS = 'subNetworks'
+    VIEWS = 'cyViews'
+    GROUPS = 'cyGroups'
+    TABLE_COLUMN = 'cyTableColumn'
     NETWORK_RELATIONS = 'networkRelations'
     DATA_TYPE_BOOLEAN = "boolean"
     DATA_TYPE_DOUBLE = "double"
