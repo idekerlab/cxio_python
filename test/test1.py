@@ -11,8 +11,6 @@ class MyTestCase(unittest.TestCase):
     def test_1(self):
         print('\n---------- cxio tests start -----------\n')
 
-
-
     def test_2(self):
         e = ElementMaker.create_nodes_aspect_element(1, 'node 1', 'N1')
         self.assertEquals(e.get_name(), CxConstants.NODES)
@@ -226,7 +224,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEquals(len(cx[CxConstants.EDGE_ATTRIBUTES]), 2)
         self.assertEquals(len(cx[CxConstants.NETWORK_ATTRIBUTES]), 2)
         self.assertEquals(len(cx[CxConstants.SUB_NETWORKS]), 1)
-
 
 
 if __name__ == '__main__':

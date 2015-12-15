@@ -109,7 +109,7 @@ class ElementMaker(object):
              }
         if sub_network_id:
             e['s'] = sub_network_id
-        return AspectElement(CxConstants.HIDDEN_ATTRIBUTE, e)
+        return AspectElement(CxConstants.HIDDEN_ATTRIBUTES, e)
 
     @staticmethod
     def create_edge_attributes_aspect_element(sub_network_id, edge_id, name, value, data_type=None):
@@ -295,7 +295,7 @@ class ElementMaker(object):
         return Element(CxConstants.NUMBER_VERIFICATION, e)
 
     @staticmethod
-    def create_status_element(success=True, error_msg='' ):
+    def create_status_element(success=True, error_msg=''):
         """ Convenience method to create a status element
         :rtype: Element
         """
