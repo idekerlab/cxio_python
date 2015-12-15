@@ -12,31 +12,7 @@ class MyTestCase(unittest.TestCase):
     def test_1(self):
         print('\n---------- cxio tests start -----------\n')
 
-        node_0 = AspectElement(CxConstants.NODES, {"id": "_:0"})
-        node_1 = AspectElement(CxConstants.NODES, {"id": "_:1"})
 
-        nodes = []
-        nodes.append(node_0)
-        nodes.append(node_1)
-
-        fo = io.StringIO()
-
-        # Creating a CX writer
-        w = CxWriter(fo)
-
-        # Starting the json list
-        w.start()
-
-        w.start_aspect_fragment(CxConstants.NODES)
-
-        w.write_aspect_element(node_0)
-        w.write_aspect_element(node_1)
-
-        w.end_aspect_fragment()
-
-        w.end()
-
-        # self.assertEqual()
 
     def test_2(self):
         e = ElementMaker.create_nodes_aspect_element(1, 'node 1', 'N1')
@@ -132,6 +108,24 @@ class MyTestCase(unittest.TestCase):
         self.assertEquals(d['y'], 2.22)
         self.assertEquals(d['z'], 3.33)
 
+    def test_12(self):
+        e = ElementMaker.create_pre_metadata_element('nodes', 1, 'v2.2', 123, [], 456)
+        self.assertEquals(e.get_name(), CxConstants.META_DATA)
+        d = e.get_data()
+        self.assertEquals(d['name'], 'nodes')
+        self.assertEquals(d['version'], 'v2.2')
+        self.assertEquals(d['idCounter'], 456)
+        self.assertEquals(d['properties'], [])
+        self.assertEquals(d['lastUpdate'], 123)
+        self.assertEquals(d['consistencyGroup'], 1)
+
+    def test_13(self):
+        e = ElementMaker.create_post_metadata_element('nodes', 456)
+        self.assertEquals(e.get_name(), CxConstants.META_DATA)
+        d = e.get_data()
+        self.assertEquals(d['name'], 'nodes')
+        self.assertEquals(d['idCounter'], 456)
+
     def test_x(self):
         n1 = ElementMaker.create_nodes_aspect_element(1, 'node 1', 'N1')
         n2 = ElementMaker.create_nodes_aspect_element(2, 'node 2', 'N2')
@@ -148,13 +142,16 @@ class MyTestCase(unittest.TestCase):
                                                                        CxConstants.DATA_TYPE_LIST_OF_DOUBLE)
         c1 = ElementMaker.create_cartesian_layout_element(1, 1200, 1.11, 2.22, 3.33)
         c2 = ElementMaker.create_cartesian_layout_element(2, 1200, -1.11, -2.22)
+        prmd = ElementMaker.create_pre_metadata_element('nodes', 1, 'v2.2', 1234567, [], 2)
+        pomd1 = ElementMaker.create_post_metadata_element('nodes', 2)
+        pomd2 = ElementMaker.create_post_metadata_element('edges', 1)
 
         fo = io.StringIO('')
 
-        # Creating a CX writer
         w = CxWriter(fo)
 
-        # Starting the json list
+        w.add_pre_meta_data([prmd])
+
         w.start()
 
         w.start_aspect_fragment(CxConstants.NODES)
@@ -186,20 +183,27 @@ class MyTestCase(unittest.TestCase):
         w.write_aspect_element(edal)
         w.end_aspect_fragment()
 
+        w.add_post_meta_data([pomd1, pomd2])
+
         w.end(True, "no error")
 
         json_str = fo.getvalue()
         print(json_str)
 
         # READING
-        # -------
+
         fi = io.StringIO(json_str)
 
         cx_reader = CxReader(fi)
 
-        # for e in cx_reader2.get_pre_meta_data():
+        self.assertEquals(len(cx_reader.get_pre_meta_data()), 1)
 
         cx = cx_reader.parse_as_dictionary()
+
+        self.assertEquals(cx_reader.get_error_msg(), "no error")
+        self.assertEquals(cx_reader.get_is_success(), True)
+
+        self.assertEquals(len(cx_reader.get_post_meta_data()), 2)
 
         self.assertEquals(len(cx[CxConstants.NODES]), 2)
         self.assertEquals(len(cx[CxConstants.EDGES]), 1)
@@ -208,7 +212,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEquals(len(cx[CxConstants.EDGE_ATTRIBUTES]), 2)
         self.assertEquals(len(cx[CxConstants.NETWORK_ATTRIBUTES]), 2)
 
-        # for e in cx_reader2.get_post_meta_data():
 
 
 if __name__ == '__main__':

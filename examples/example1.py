@@ -37,9 +37,9 @@ for e in cx_reader.get_post_meta_data():
 print()
 print()
 
-# Getting and printing the status element
-print('the status element: ')
-print(cx_reader.get_status())
+# Getting and printing the status
+print('is success: ' + str(cx_reader.get_is_success()))
+print('error msg : ' + cx_reader.get_error_msg())
 
 print()
 print()

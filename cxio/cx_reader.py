@@ -84,12 +84,19 @@ class CxReader(object):
         """
         return self.__number_verification
 
-    def get_status(self):
-        """ Returns status element.
+    def get_error_msg(self):
+        """ Returns error of the status element.
         To be called once a stream has been completely read in.
-        :rtype: Element
+        :rtype: String
         """
-        return self.__status
+        return self.__status.get_data()['error']
+
+    def get_is_success(self):
+        """ Returns success of the status element.
+        To be called once a stream has been completely read in.
+        :rtype: Boolean
+        """
+        return self.__status.get_data()['success']
 
     def parse_as_dictionary(self):
         """ Convenience method to return all aspect elements

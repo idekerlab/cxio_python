@@ -154,7 +154,7 @@ class ElementMaker(object):
         """
         e = {'name': aspect_name,
              'consistencyGroup': consistency_group,
-             'version': version,
+             'version': str(version),
              'lastUpdate': last_update,
              'properties': properties,
              'idCounter': id_counter
