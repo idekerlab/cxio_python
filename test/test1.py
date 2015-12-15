@@ -132,6 +132,13 @@ class MyTestCase(unittest.TestCase):
         self.assertEquals(d['nodes'][1], 2)
         self.assertEquals(d['edges'][0], 3)
 
+    def test_15(self):
+        e = ElementMaker.create_views_aspect_element(2000, 1200)
+        self.assertEquals(e.get_name(), CxConstants.VIEWS)
+        d = e.get_data()
+        self.assertEquals(d['@id'], 2000)
+        self.assertEquals(d['s'], 1200)
+
     def test_x(self):
         n1 = ElementMaker.create_nodes_aspect_element(1, 'node 1', 'N1')
         n2 = ElementMaker.create_nodes_aspect_element(2, 'node 2', 'N2')
