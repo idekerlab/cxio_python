@@ -211,8 +211,8 @@ class MyTestCase(unittest.TestCase):
             "definition": "COL=name,T=string"}
                     }
 
-        e = ElementMaker.create_visual_properties_aspect_element("nodes:default", 1, 1200, properties, dependencies,
-                                                                 mappings)
+        e = ElementMaker.create_visual_properties_aspect_element(CxConstants.VP_PROPERTIES_OF_NODES_DEFAULT, 1, 1200,
+                                                                 properties, dependencies, mappings)
         self.assertEquals(e.get_name(), CxConstants.VISUAL_PROPERTIES)
         d = e.get_data()
         self.assertEquals(d['properties_of'], "nodes:default")

@@ -35,6 +35,11 @@ class CxConstants(object):
     DATA_TYPE_LIST_OF_STRING = "list_of_string"
     RELATIONSHIP_TYPE_SUBNETWORK = "subnetwork"
     RELATIONSHIP_TYPE_VIEW = "view"
+    VP_PROPERTIES_OF_NODES = "nodes"
+    VP_PROPERTIES_OF_EDGES = "edges"
+    VP_PROPERTIES_OF_NETWORK = "network"
+    VP_PROPERTIES_OF_NODES_DEFAULT = "nodes:default"
+    VP_PROPERTIES_OF_EDGES_DEFAULT = "edges:default"
 
     SINGLE_ATTRIBUTE_TYPES = frozenset([
         DATA_TYPE_BOOLEAN,
@@ -53,3 +58,10 @@ class CxConstants(object):
         DATA_TYPE_LIST_OF_LONG,
         DATA_TYPE_LIST_OF_SHORT,
         DATA_TYPE_LIST_OF_STRING])
+
+    VP_PROPERTIES_OF = frozenset([
+        VP_PROPERTIES_OF_NODES,
+        VP_PROPERTIES_OF_EDGES,
+        VP_PROPERTIES_OF_NETWORK,
+        VP_PROPERTIES_OF_NODES_DEFAULT,
+        VP_PROPERTIES_OF_EDGES_DEFAULT])

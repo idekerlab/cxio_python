@@ -75,6 +75,29 @@ class NdexCXHelper:
         self.__cx_writer.write_single_aspect_fragment(
             ElementMaker.create_sub_networks_aspect_element(sub_network_id, node_ids, edge_ids))
 
+    def emit_cx_views(self, view_id, sub_network_id):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_views_aspect_element(view_id, sub_network_id))
+
+    def emit_cx_visual_properties(self, properties_of, applies_to, view, properties, dependencies=None,
+                                  mappings=None):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_visual_properties_aspect_element(properties_of, applies_to, view, properties,
+                                                                 dependencies,
+                                                                 mappings))
+
+    def emit_cx_table_column(self, sub_network, applies_to, name, data_type):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_table_column_aspect_element(sub_network, applies_to, name, data_type))
+
+    def emit_cx_network_relations(self, child, parent=None, relationship=None, name=None):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_network_relations_aspect_element(child, parent, relationship, name))
+
+    def emit_cx_groups(self, group_id, view_id, name, nodes, external_edges, internal_edges):
+        self.__cx_writer.write_single_aspect_fragment(
+            ElementMaker.create_groups_aspect_element(group_id, view_id, name, nodes, external_edges, internal_edges))
+
     def emit_cx_citation(self, citation_type, title, contributors, identifier, description):
         self.__citation_id_counter += 1
         self.__cx_writer.write_single_aspect_fragment(
@@ -112,7 +135,7 @@ class NdexCXHelper:
         pre_meta_data = []
         for aspect_name in self.__aspect_names:
             pre_meta_data.append(ElementMaker.create_pre_metadata_element(aspect_name, 1, '1.0', self.__update_time,
-                                                                          [], 1))
+                [], 1))
         self.__cx_writer.add_pre_meta_data(pre_meta_data)
 
     def __add_post_metadata(self):

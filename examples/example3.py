@@ -43,6 +43,25 @@ w.emit_cx_hidden_attribute(1, "algorithm", "circular")
 
 w.emit_cx_sub_networks(1200, [1, 2], [3, 4])
 
+w.emit_cx_groups(22, 1200, 'group 1', [1], [3, 4], [2])
+
+w.emit_cx_table_column(1200, 'nodes', 'weight', CxConstants.DATA_TYPE_DOUBLE)
+
+w.emit_cx_network_relations(1200, 22, CxConstants.RELATIONSHIP_TYPE_VIEW, 'subnetwork one')
+
+w.emit_cx_views(2000, 1200)
+
+properties = {"NODE_BORDER_PAINT": "#CCCCCC",
+              "NODE_BORDER_STROKE": "SOLID",
+              "NODE_BORDER_TRANSPARENCY": "255"}
+dependencies = {"nodeCustomGraphicsSizeSync": "true",
+                "nodeSizeLocked": "false"}
+mappings = {"NODE_LABEL": {
+    "type": "PASSTHROUGH",
+    "definition": "COL=name,T=string"}}
+
+w.emit_cx_visual_properties(CxConstants.VP_PROPERTIES_OF_NODES_DEFAULT, 1, 2000, properties, dependencies, mappings)
+
 w.emit_cx_node_citation(1, 22)
 
 w.emit_cx_edge_citation(2, 11)
@@ -91,7 +110,7 @@ print()
 cx2 = cx_reader.parse_as_dictionary()
 # Note: In real-world application, this would be used instead:
 # for e in cx_reader.aspect_elements():
-#     do something with e
+# do something with e
 
 for e in cx2[CxConstants.NODES]:
     print(e)
@@ -115,6 +134,18 @@ for e in cx2[CxConstants.HIDDEN_ATTRIBUTES]:
     print(e)
 
 for e in cx2[CxConstants.SUB_NETWORKS]:
+    print(e)
+
+for e in cx2[CxConstants.GROUPS]:
+    print(e)
+
+for e in cx2[CxConstants.NETWORK_RELATIONS]:
+    print(e)
+
+for e in cx2[CxConstants.VIEWS]:
+    print(e)
+
+for e in cx2[CxConstants.VISUAL_PROPERTIES]:
     print(e)
 
 for e in cx2['nodeCitations']:

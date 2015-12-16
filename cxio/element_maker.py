@@ -181,7 +181,8 @@ class ElementMaker(object):
         if parent:
             e['p'] = parent
         if relationship:
-            if (relationship != CxConstants.RELATIONSHIP_TYPE_VIEW) and (relationship != CxConstants.RELATIONSHIP_TYPE_SUBNETWORK):
+            if (relationship != CxConstants.RELATIONSHIP_TYPE_VIEW) and (
+                relationship != CxConstants.RELATIONSHIP_TYPE_SUBNETWORK):
                 raise IOError('illegal relationship type: ' + relationship)
             e['r'] = relationship
         if name:
@@ -207,7 +208,8 @@ class ElementMaker(object):
         """
         :rtype: AspectElement
         """
-        if (data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES) and (data_type not in CxConstants.LIST_ATTRIBUTE_TYPES):
+        if (data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES) and (
+            data_type not in CxConstants.LIST_ATTRIBUTE_TYPES):
             raise IOError('illegal data type for "' + name + '": ' + data_type)
 
         e = {'s': sub_network,
@@ -223,6 +225,10 @@ class ElementMaker(object):
         """
         :rtype: AspectElement
         """
+
+        if properties_of not in CxConstants.VP_PROPERTIES_OF:
+            raise IOError('illegal properties of: ' + properties_of)
+
         e = {'properties_of': properties_of,
              'applies_to': applies_to,
              }
