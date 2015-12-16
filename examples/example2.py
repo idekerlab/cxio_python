@@ -49,6 +49,9 @@ fo = io.StringIO("")
 # Creating a CX writer
 w = CxWriter(fo)
 
+# Setting "pretty" formatting to true (is true by default, though)
+w.set_pretty_formatting(True)
+
 # Adding pre meta data
 w.add_pre_meta_data(cx_reader.get_pre_meta_data())
 
