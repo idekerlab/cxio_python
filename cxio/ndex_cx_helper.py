@@ -63,17 +63,9 @@ class NdexCXHelper:
         self.__cx_writer.write_single_aspect_fragment(
             ElementMaker.create_network_attributes_aspect_element(sub_network_id, name, value, data_type))
 
-    def emit_cx_node_list_attribute(self, node_id, name, values, data_type):
+    def emit_cx_hidden_attribute(self, sub_network_id, name, value, data_type=None):
         self.__cx_writer.write_single_aspect_fragment(
-            ElementMaker.create_node_list_attributes_aspect_element(None, node_id, name, values, data_type))
-
-    def emit_cx_edge_list_attribute(self, edge_id, name, values, data_type):
-        self.__cx_writer.write_single_aspect_fragment(
-            ElementMaker.create_edge_list_attributes_aspect_element(None, edge_id, name, values, data_type))
-
-    def emit_cx_network_list_attribute(self, sub_network_id, name, values, data_type):
-        self.__cx_writer.write_single_aspect_fragment(
-            ElementMaker.create_network_list_attributes_aspect_element(sub_network_id, name, values, data_type))
+            ElementMaker.create_hidden_attributes_aspect_element(sub_network_id, name, value, data_type))
 
     def emit_cx_cartesian_layout_element(self, node_id, view_id, x, y, z=None):
         self.__cx_writer.write_single_aspect_fragment(

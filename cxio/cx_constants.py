@@ -33,6 +33,8 @@ class CxConstants(object):
     DATA_TYPE_LIST_OF_LONG = "list_of_long"
     DATA_TYPE_LIST_OF_SHORT = "list_of_short"
     DATA_TYPE_LIST_OF_STRING = "list_of_string"
+    RELATIONSHIP_TYPE_SUBNETWORK = "subnetwork"
+    RELATIONSHIP_TYPE_VIEW = "view"
 
     SINGLE_ATTRIBUTE_TYPES = frozenset([
         DATA_TYPE_BOOLEAN,

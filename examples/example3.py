@@ -37,7 +37,9 @@ w.emit_cx_edge_attribute(1, "edge attribute 1", "value 1", CxConstants.DATA_TYPE
 
 w.emit_cx_network_attribute(1, "size", "12", CxConstants.DATA_TYPE_INTEGER)
 
-w.emit_cx_network_list_attribute(1, "expressions", ["12", "13"], CxConstants.DATA_TYPE_LIST_OF_INTEGER)
+w.emit_cx_network_attribute(1, "expressions", ["12", "13"], CxConstants.DATA_TYPE_LIST_OF_INTEGER)
+
+w.emit_cx_hidden_attribute(1, "algorithm", "circular")
 
 w.emit_cx_sub_networks(1200, [1, 2], [3, 4])
 
@@ -104,6 +106,12 @@ for e in cx2[CxConstants.NODE_ATTRIBUTES]:
     print(e)
 
 for e in cx2[CxConstants.EDGE_ATTRIBUTES]:
+    print(e)
+
+for e in cx2[CxConstants.NETWORK_ATTRIBUTES]:
+    print(e)
+
+for e in cx2[CxConstants.HIDDEN_ATTRIBUTES]:
     print(e)
 
 for e in cx2[CxConstants.SUB_NETWORKS]:

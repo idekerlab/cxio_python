@@ -52,29 +52,22 @@ class ElementMaker(object):
         """
         :rtype: AspectElement
         """
-        e = {'n': name,
-             'v': str(value)
-             }
-        if data_type:
-            if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
-                raise IOError('illegal data type for network attribute "' + name + '": ' + data_type)
-            if data_type != CxConstants.DATA_TYPE_STRING:
-                e['d'] = data_type
-        if sub_network_id:
-            e['s'] = sub_network_id
-        return AspectElement(CxConstants.NETWORK_ATTRIBUTES, e)
+        e = {'n': name}
 
-    @staticmethod
-    def create_network_list_attributes_aspect_element(sub_network_id, name, values, data_type):
-        """
-        :rtype: AspectElement
-        """
-        if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
-            raise IOError('illegal data type for list network attribute "' + name + '": ' + data_type)
-        e = {'n': name,
-             'v': values,
-             'd': data_type
-             }
+        if isinstance(value, list):
+            if data_type is None:
+                raise IOError('data type missing for (list) network attributes "' + name + '"')
+            if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
+                raise IOError('illegal data type for (list) network attributes "' + name + '": ' + data_type)
+            e['d'] = data_type
+            e['v'] = value
+        else:
+            if data_type:
+                if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
+                    raise IOError('illegal data type for (single) network attributes "' + name + '": ' + data_type)
+                if data_type != CxConstants.DATA_TYPE_STRING:
+                    e['d'] = data_type
+            e['v'] = str(value)
         if sub_network_id:
             e['s'] = sub_network_id
         return AspectElement(CxConstants.NETWORK_ATTRIBUTES, e)
@@ -84,29 +77,22 @@ class ElementMaker(object):
         """
         :rtype: AspectElement
         """
-        e = {'n': name,
-             'v': str(value)
-             }
-        if data_type:
-            if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
-                raise IOError('illegal data type for hidden attribute "' + name + '": ' + data_type)
-            if data_type != CxConstants.DATA_TYPE_STRING:
-                e['d'] = data_type
-        if sub_network_id:
-            e['s'] = sub_network_id
-        return AspectElement(CxConstants.HIDDEN_ATTRIBUTES, e)
+        e = {'n': name}
 
-    @staticmethod
-    def create_hidden_list_attributes_aspect_element(sub_network_id, name, values, data_type):
-        """
-        :rtype: AspectElement
-        """
-        if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
-            raise IOError('illegal data type for list hidden attribute "' + name + '": ' + data_type)
-        e = {'n': name,
-             'v': values,
-             'd': data_type
-             }
+        if isinstance(value, list):
+            if data_type is None:
+                raise IOError('data type missing for (list) hidden attributes "' + name + '"')
+            if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
+                raise IOError('illegal data type for (list) hidden attributes "' + name + '": ' + data_type)
+            e['d'] = data_type
+            e['v'] = value
+        else:
+            if data_type:
+                if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
+                    raise IOError('illegal data type for (single) hidden attributes "' + name + '": ' + data_type)
+                if data_type != CxConstants.DATA_TYPE_STRING:
+                    e['d'] = data_type
+            e['v'] = str(value)
         if sub_network_id:
             e['s'] = sub_network_id
         return AspectElement(CxConstants.HIDDEN_ATTRIBUTES, e)
@@ -117,30 +103,23 @@ class ElementMaker(object):
         :rtype: AspectElement
         """
         e = {'po': edge_id,
-             'n': name,
-             'v': str(value)
+             'n': name
              }
-        if data_type:
-            if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
-                raise IOError('illegal data type for edge attribute "' + name + '": ' + data_type)
-            if data_type != CxConstants.DATA_TYPE_STRING:
-                e['d'] = data_type
-        if sub_network_id:
-            e['s'] = sub_network_id
-        return AspectElement(CxConstants.EDGE_ATTRIBUTES, e)
 
-    @staticmethod
-    def create_edge_list_attributes_aspect_element(sub_network_id, edge_id, name, values, data_type):
-        """
-        :rtype: AspectElement
-        """
-        if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
-            raise IOError('illegal data type for list edge attribute "' + name + '": ' + data_type)
-        e = {'po': edge_id,
-             'n': name,
-             'v': values,
-             'd': data_type
-             }
+        if isinstance(value, list):
+            if data_type is None:
+                raise IOError('data type missing for (list) edge attributes "' + name + '"')
+            if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
+                raise IOError('illegal data type for (list) edge attributes "' + name + '": ' + data_type)
+            e['d'] = data_type
+            e['v'] = value
+        else:
+            if data_type:
+                if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
+                    raise IOError('illegal data type for (single) edge attributes "' + name + '": ' + data_type)
+                if data_type != CxConstants.DATA_TYPE_STRING:
+                    e['d'] = data_type
+            e['v'] = str(value)
         if sub_network_id:
             e['s'] = sub_network_id
         return AspectElement(CxConstants.EDGE_ATTRIBUTES, e)
@@ -151,30 +130,23 @@ class ElementMaker(object):
         :rtype: AspectElement
         """
         e = {'po': node_id,
-             'n': name,
-             'v': str(value)
+             'n': name
              }
-        if data_type:
-            if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
-                raise IOError('illegal data type for node attribute "' + name + '": ' + data_type)
-            if data_type != CxConstants.DATA_TYPE_STRING:
-                e['d'] = data_type
-        if sub_network_id:
-            e['s'] = sub_network_id
-        return AspectElement(CxConstants.NODE_ATTRIBUTES, e)
 
-    @staticmethod
-    def create_node_list_attributes_aspect_element(sub_network_id, node_id, name, values, data_type):
-        """
-        :rtype: AspectElement
-        """
-        if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
-            raise IOError('illegal data type for list node attribute "' + name + '": ' + data_type)
-        e = {'po': node_id,
-             'n': name,
-             'v': values,
-             'd': data_type
-             }
+        if isinstance(value, list):
+            if data_type is None:
+                raise IOError('data type missing for (list) node attributes "' + name + '"')
+            if data_type not in CxConstants.LIST_ATTRIBUTE_TYPES:
+                raise IOError('illegal data type for (list) node attributes "' + name + '": ' + data_type)
+            e['d'] = data_type
+            e['v'] = value
+        else:
+            if data_type:
+                if data_type not in CxConstants.SINGLE_ATTRIBUTE_TYPES:
+                    raise IOError('illegal data type for (single) node attributes "' + name + '": ' + data_type)
+                if data_type != CxConstants.DATA_TYPE_STRING:
+                    e['d'] = data_type
+            e['v'] = str(value)
         if sub_network_id:
             e['s'] = sub_network_id
         return AspectElement(CxConstants.NODE_ATTRIBUTES, e)
@@ -209,6 +181,8 @@ class ElementMaker(object):
         if parent:
             e['p'] = parent
         if relationship:
+            if (relationship != CxConstants.RELATIONSHIP_TYPE_VIEW) and (relationship != CxConstants.RELATIONSHIP_TYPE_SUBNETWORK):
+                raise IOError('illegal relationship type: ' + relationship)
             e['r'] = relationship
         if name:
             e['name'] = name
@@ -222,7 +196,7 @@ class ElementMaker(object):
         e = {'@id': group_id,
              'view': view_id,
              'name': name,
-             'edges': nodes,
+             'nodes': nodes,
              'external_edges': external_edges,
              'internal_edges': internal_edges
              }
