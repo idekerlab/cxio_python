@@ -3,6 +3,7 @@ from cxio.cx_reader import CxReader
 from cxio.cx_constants import CxConstants
 from cxio.ndex_cx_helper import NdexCXHelper
 
+
 # -------
 # WRITING
 # -------
@@ -22,12 +23,19 @@ w.emit_cx_context()
 
 w.emit_cx_node("node 1")
 w.emit_cx_node("node 2")
+w.emit_cx_node("node 3")
 
 w.emit_cx_edge(1, 2, "1->2")
+w.emit_cx_edge(2, 3, "2->3")
+w.emit_cx_edge(1, 3, "1->3")
+
+w.emit_cx_node("node 4")
+w.emit_cx_edge(3, 4, "3->4")
+
 
 w.emit_cx_cartesian_layout_element(1, None, 20, 30)
 
-w.emit_cx_cartesian_layout_element(1, None, -20, -30)
+w.emit_cx_cartesian_layout_element(2, None, -20, -30)
 
 w.emit_cx_node_attribute(1, "node attribute 1", "value 1", CxConstants.DATA_TYPE_STRING)
 
@@ -62,9 +70,12 @@ mappings = {"NODE_LABEL": {
 
 w.emit_cx_visual_properties(CxConstants.VP_PROPERTIES_OF_NODES_DEFAULT, 1, 2000, properties, dependencies, mappings)
 
-w.emit_cx_node_citation(1, 22)
+w.emit_cx_node_citation(1, 11)
+w.emit_cx_node_citation(2, 22)
 
-w.emit_cx_edge_citation(2, 11)
+w.emit_cx_edge_citation(2, 1100)
+
+w.emit_cx_node_citation(3, 33)
 
 w.emit_cx_node_support(1, 111)
 
@@ -73,8 +84,12 @@ w.emit_cx_edge_support(2, 222)
 w.emit_cx_support(1, "bcl2 review")
 
 w.emit_cx_citation("review", "bcl2 review", "John Reed", "123", "about bcl2")
+w.emit_cx_citation("original", "bcl2 and bax", "John Reed", "400", "new")
 
 w.emit_cx_function_term("function 1")
+w.emit_cx_function_term("function 2")
+
+w.emit_cx_cartesian_layout_element(3, None, -200, -300)
 
 w.end()
 

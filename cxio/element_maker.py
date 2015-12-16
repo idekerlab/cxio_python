@@ -173,7 +173,7 @@ class ElementMaker(object):
         return AspectElement(CxConstants.VIEWS, e)
 
     @staticmethod
-    def create_network_relations_aspect_element(child, parent=None, relationship=None, name=None):
+    def create_network_relations_aspect_element(child, parent, relationship=None, name=None):
         """
         :rtype: AspectElement
         """
