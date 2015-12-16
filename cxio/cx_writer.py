@@ -26,6 +26,14 @@ class CxWriter(object):
         self.__fragment_started = False
         self.__first = True
         self.__in_fragment = False
+        self.__pretty_formatting = True
+
+    def set_pretty_formatting(self, pretty_formatting=True):
+        """ This allows to turn "pretty" formatting on/off.
+        "Pretty" formatting is on by default.
+        :param pretty_formatting: boolean
+        """
+        self.__pretty_formatting = pretty_formatting
 
     def add_pre_meta_data(self, pre_meta_data):
         """ To add pre meta data, to be written prior to the aspect elements.
@@ -78,7 +86,8 @@ class CxWriter(object):
         self.__write_status_element(success, error_msg)
         self.__ended = True
         self.__started = False
-        self.__out.write('\n')
+        if self.__pretty_formatting:
+            self.__out.write('\n')
         self.__out.write(']')
 
     def start_aspect_fragment(self, aspect_name):
@@ -98,17 +107,16 @@ class CxWriter(object):
         if self.__first:
             self.__first = False
         else:
-            self.__out.write(', ')
-        self.__out.write('\n')
-        self.__out.write(' { ')
-        self.__out.write('"')
+            self.__out.write(',')
+        if self.__pretty_formatting:
+            self.__out.write('\n { "')
+        else:
+            self.__out.write('{"')
         self.__out.write(aspect_name)
-        self.__out.write('"')
-        self.__out.write(':')
-        self.__out.write(' ')
-        self.__out.write('[')
-        self.__out.write(' ')
-        self.__out.write('\n')
+        if self.__pretty_formatting:
+            self.__out.write('": [\n  ')
+        else:
+            self.__out.write('":[')
 
     def end_aspect_fragment(self):
         """ To end writing a aspect fragment (list of aspect elements of the same category).
@@ -118,10 +126,10 @@ class CxWriter(object):
         if not self.__fragment_started:
             raise IOError('fragment not started')
         self.__fragment_started = False
-        self.__out.write(' ')
-        self.__out.write(']')
-        self.__out.write('\n')
-        self.__out.write(' }')
+        if self.__pretty_formatting:
+            self.__out.write(' ]\n }')
+        else:
+            self.__out.write(']}')
         self.__in_fragment = False
 
     def write_aspect_element(self, element):
@@ -134,9 +142,10 @@ class CxWriter(object):
         if not self.__fragment_started:
             raise IOError('fragment not started')
         if self.__in_fragment is True:
-            self.__out.write(', ')
-            self.__out.write('\n')
-        self.__out.write('  ')
+            if self.__pretty_formatting:
+                self.__out.write(',\n  ')
+            else:
+                self.__out.write(',')
         self.__out.write(self.__aspect_element_to_json(element))
         self.__in_fragment = True
         my_name = element.get_name()
@@ -144,6 +153,12 @@ class CxWriter(object):
             self.__aspect_element_counts[my_name] = 1
         else:
             self.__aspect_element_counts[my_name] += 1
+
+    def get_aspect_element_counts(self):
+        """ Returns a dictionary containing aspect element counts written out so far.
+        :return:dict
+        """
+        return self.__aspect_element_counts
 
     def write_aspect_fragment(self, aspect_element_list):
         """ Convenience method to write a list of aspect elements ("aspect fragment").
@@ -173,26 +188,23 @@ class CxWriter(object):
 
     def __write_number_verification_element(self):
         e = ElementMaker.create_number_verification_element()
-        self.__out.write('\n')
-        self.__out.write(' { ')
-        self.__out.write('"')
+        if self.__pretty_formatting:
+            self.__out.write('\n { "')
+        else:
+            self.__out.write('{"')
         self.__out.write(e.get_name())
-        self.__out.write('"')
-        self.__out.write(':')
-        self.__out.write(' ')
+        self.__out.write('": ')
         self.__out.write(self.__aspect_element_to_json(e))
         self.__out.write(' },')
 
     def __write_status_element(self, success=True, error_msg=''):
         e = ElementMaker.create_status_element(success,error_msg)
-        self.__out.write(',')
-        self.__out.write('\n')
-        self.__out.write(' { ')
-        self.__out.write('"')
+        if self.__pretty_formatting:
+            self.__out.write(',\n { "')
+        else:
+            self.__out.write(',{"')
         self.__out.write(e.get_name())
-        self.__out.write('"')
-        self.__out.write(':')
-        self.__out.write(' ')
+        self.__out.write('": ')
         self.__out.write(self.__aspect_element_to_json(e))
         self.__out.write(' }')
 
@@ -201,9 +213,6 @@ class CxWriter(object):
         for e in meta_data:
             self.write_aspect_element(e)
         self.end_aspect_fragment()
-
-    def get_aspect_element_counts(self):
-        return self.__aspect_element_counts
 
     @staticmethod
     def __aspect_element_to_json(aspect_element):
