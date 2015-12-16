@@ -145,12 +145,25 @@ class CxWriter(object):
         else:
             self.__aspect_element_counts[my_name] += 1
 
+    def write_aspect_fragment(self, aspect_element_list):
+        """ Convenience method to write a list of aspect elements ("aspect fragment").
+        :param aspect_element_list: list
+            The list of AspectElement (of the same category) to be written out.
+        """
+        if len(aspect_element_list) > 0:
+            name = aspect_element_list[0].get_name()
+            self.start_aspect_fragment(name)
+            for aspect_element in aspect_element_list:
+                if not name == aspect_element.get_name():
+                    raise ValueError('"' + str(name) + '" different from "' + str(aspect_element.get_name() + '"'))
+                self.write_aspect_element(aspect_element)
+            self.end_aspect_fragment()
+
     def write_single_aspect_fragment(self, aspect_element):
-        """ Convenience method to write a aspect element as "aspect fragment").
-        Not efficient.
-        :param cx_writer: CxWriter
-            A CxWriter ready to write aspect elements.
-        :param aspect_elements: AspectElement
+        """ Convenience method to write a single aspect element as "aspect fragment".
+        Not recommended, use write_aspect_fragment whenever more than
+        one aspect of the same category needs to be outputted.
+        :param aspect_element: AspectElement a single aspect element
         """
 
         name = aspect_element.get_name()

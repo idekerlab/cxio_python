@@ -57,13 +57,13 @@ w.start()
 
 # Writing select aspects
 
-CxUtil.write_aspect_fragment(w, cx[CxConstants.NODES])
+w.write_aspect_fragment(cx[CxConstants.NODES])
 
-CxUtil.write_aspect_fragment(w, cx[CxConstants.EDGES])
+w.write_aspect_fragment(cx[CxConstants.EDGES])
 
-CxUtil.write_aspect_fragment(w, cx[CxConstants.VISUAL_PROPERTIES])
+w.write_aspect_fragment(cx[CxConstants.VISUAL_PROPERTIES])
 
-CxUtil.write_aspect_fragment(w, cx[CxConstants.CARTESIAN_LAYOUT])
+w.write_aspect_fragment(cx[CxConstants.CARTESIAN_LAYOUT])
 
 # Adding post meta data
 w.add_post_meta_data(cx_reader.get_post_meta_data())
