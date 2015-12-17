@@ -31,7 +31,7 @@ setup(
         'Intended Audience :: Science/Research',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
-        'Development Status :: 3 - Beta',
+        'Development Status :: 3 - Alpha',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
