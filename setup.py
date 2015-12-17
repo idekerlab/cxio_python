@@ -15,7 +15,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='cxio',
-    version='0.2.0',
+    version='0.3.0',
     description='Utility to parse CX JSON streams',
     long_description='Utility collection to use CX JSON in Python.',
     author='Christian Zmasek',
@@ -31,7 +31,7 @@ setup(
         'Intended Audience :: Science/Research',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 3 - Beta',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
