@@ -1,11 +1,16 @@
 import sys
 import re
 import os.path
+import time
 from cxio.cx_writer import CxWriter
 from cxio.cx_constants import CxConstants
 from cxio.element_maker import ElementMaker
 
-s = re.compile('[\s,]+')
+SEP = re.compile('[\s,]+')
+
+UPDATE_TIME = int(round(time.time() * 1000))
+ASPECT_VERSION = "1.0"
+ASPECT_CONSISTENCY_GROUP = 1
 
 if len(sys.argv) != 3:
     print()
@@ -42,7 +47,7 @@ edge_count = 0
 node_count = 0
 with fi as lines:
     for line in lines:
-        l = s.split(line)
+        l = SEP.split(line)
         if len(l) > 2:
             n1 = l[0]
             n2 = l[1]
@@ -64,9 +69,11 @@ w.set_pretty_formatting(True)
 
 id_count = node_count + edge_count + 1
 
-w.add_pre_meta_data(ElementMaker.create_pre_metadata_element(CxConstants.NODES, 1, "1.0", 20151217, [], id_count,
+w.add_pre_meta_data(ElementMaker.create_pre_metadata_element(CxConstants.NODES, ASPECT_CONSISTENCY_GROUP,
+                                                             ASPECT_VERSION, UPDATE_TIME, [], id_count,
                                                              len(id_nn)))
-w.add_pre_meta_data(ElementMaker.create_pre_metadata_element(CxConstants.EDGES, 1, "1.0", 20151217, [], id_count,
+w.add_pre_meta_data(ElementMaker.create_pre_metadata_element(CxConstants.EDGES, ASPECT_CONSISTENCY_GROUP,
+                                                             ASPECT_VERSION, UPDATE_TIME, [], id_count,
                                                              len(edges)))
 
 w.start()
