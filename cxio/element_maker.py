@@ -243,17 +243,20 @@ class ElementMaker(object):
         return AspectElement(CxConstants.VISUAL_PROPERTIES, e)
 
     @staticmethod
-    def create_pre_metadata_element(aspect_name, consistency_group, version, last_update, properties, id_counter):
+    def create_pre_metadata_element(aspect_name, consistency_group, version, last_update, properties, id_counter,
+                                    element_count=None):
         """
         :rtype: Element
         """
-        e = {'name': aspect_name,
+        e = {'name': str(aspect_name),
              'consistencyGroup': consistency_group,
              'version': str(version),
              'lastUpdate': last_update,
              'properties': properties,
              'idCounter': id_counter
              }
+        if element_count:
+            e['elementCount'] = element_count
         return Element(CxConstants.META_DATA, e)
 
     @staticmethod
