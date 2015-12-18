@@ -6,8 +6,10 @@ from cxio.cx_writer import CxWriter
 from cxio.cx_constants import CxConstants
 from cxio.element_maker import ElementMaker
 
+# For splitting lines:
 SEP = re.compile('[\s,]+')
 
+# Some constants for meta-data:
 UPDATE_TIME = int(round(time.time() * 1000))
 ASPECT_VERSION = "1.0"
 ASPECT_CONSISTENCY_GROUP = 1
@@ -40,6 +42,7 @@ print('Infile : ' + str(fi.name))
 print('Outfile: ' + str(fo.name))
 print()
 
+# Reading the infile:
 id_nn = {}
 nn_id = {}
 edges = []
@@ -63,6 +66,7 @@ with fi as lines:
             edges.append(ElementMaker.create_edges_aspect_element(edge_count, nn_id[n1], nn_id[n2], interaction))
             edge_count += 1
 
+# Writing CX:
 w = CxWriter(fo)
 
 w.set_pretty_formatting(True)
